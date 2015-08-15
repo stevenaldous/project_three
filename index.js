@@ -10,7 +10,10 @@ app.use(ejsLayouts);
 // app.use(express.static('assets'));
 
 app.get("/", function(req, res){
-    res.send("hello, world");
+    // res.render("index");
+    var fourSquareId = process.env.FOURSQUARE_ID;
+    var fourSquareSecret = process.env.FOURSQUARE_SECRET;
+    res.send([fourSquareSecret,fourSquareId])
 });
 
 app.listen(process.env.PORT || 3000);
