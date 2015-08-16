@@ -9,7 +9,7 @@ var results = require('./models/4square.json')
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(ejsLayouts);
-// app.use(express.static('assets'));
+app.use(express.static('assets'));
 
 app.get('/', function(req, res) {
   // parameters are differientiated in foursquare with an &
