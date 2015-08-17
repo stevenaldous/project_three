@@ -15,8 +15,6 @@ app.set("layout extractScripts", true);
 app.use(express.static('assets'));
 
 app.get('/', function(req, res) {
-  // added empty object to prevent front end error when trying to 
-  // access undefined results obj
   res.render('index');
 });
 
