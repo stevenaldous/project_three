@@ -15,10 +15,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       lat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(15, 15)
       },
       lng: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(15, 15)
       },
       address: {
         type: Sequelize.STRING
