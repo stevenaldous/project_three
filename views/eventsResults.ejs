@@ -30,7 +30,7 @@ $(document).ready(function(){
             'marker-size': 'medium'
           }), 'title': event.title,
         })
-      .bindPopup('<strong><a href="https://foursquare.com/v/' + event.id + '">' +
+      .bindPopup('<strong><a href="' + event.url + '">' +
         event.title + '</a></strong>')
         .addTo(foursquarePlaces);
     }
