@@ -1,0 +1,13 @@
+<% results.response.venues.forEach(function(venue) { %>
+
+  <div class="well">
+  <%= venue.name %>
+  <a href="https://foursquare.com/v/<%=venue.id%>">https://foursquare.com/v/<%=venue.id%></a>
+  <h3><%= venue.location.lat %></h3>
+  <h3><%= venue.location.lng %></h3>
+
+  </div>
+
+<% }) %>
+
+<div id="map">MAP</div>
