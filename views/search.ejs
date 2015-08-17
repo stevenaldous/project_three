@@ -1,10 +1,23 @@
-
+<%# This form searches foursquare's api%>
 <form action="/results" method="GET" role="form">
   <legend>Form title</legend>
 
   <div class="form-group">
     <label for="">label</label>
     <input name="what" type="text" class="form-control" id="" placeholder="Search for a restaurant">
+  </div>
+
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<%# This form searches eventfuls events API%>
+<form action="/eventsResults" method="GET" role="form">
+  <legend>Form title</legend>
+
+  <div class="form-group">
+    <label for="">Eventful API Search</label>
+    <input name="keywords" type="text" class="form-control" id="" placeholder="Search for a concert or public event!">
   </div>
 
 

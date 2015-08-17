@@ -38,4 +38,20 @@ app.get('/results', function(req,res) {
   });
 });
 
+// Populate the eventful results
+app.get('/eventsResults', function(req,res) {
+    var eventfulId = process.env.EVENTFUL_ID;
+    var seattle = '47.6097,-122.3331';
+    var radius =  25;
+    var keywords = req.query.keywords;
+
+    var url = ("http://api.eventful.com/json/events/search?app_key=" + eventfulId +
+"&where=" + seattle + "&within=" + radius + "&keywords=" + keywords)
+
+    request(url, function(error, response, data) {
+        res.render('eventsResults', {data:JSON.parse(data)});
+    });
+
+})
+
 app.listen(process.env.PORT || 3000);
