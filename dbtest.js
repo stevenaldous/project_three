@@ -5,6 +5,7 @@ var db = require('./models')
 app.use(bodyParser.urlencoded({extended:true}));
 
 // console.log('test');
+var userId = 1;
 ////////////////////////////////////////////////////////////
 //user creation flow - works
 // db.user.create({
@@ -21,8 +22,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 // });
 ////////////////////////////////////////////////////////////
 //user date creation - works
-// var userId = 1;
-// var dateTitle = 'test date 2';
+
+// var dateTitle = 'test date 1';
 // db.user.find({where: {id: userId}}).then(function(user){
 //   // console.log(user.id);
 //   db.date.findOrCreate({ where: {title: dateTitle},
@@ -35,8 +36,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 //venue creation through datesVenues - working, need to adjust model for lat,lng
 var dateId = 1;
 var venue = {
-  // id: 6,
-  name: 'test venue 2',
+  id: "55c6e371498eb8845e94c84b",
+  name: 'test venue 1',
   location: {
     address: '1650 E Olive Way',
     lat: 47.61975114261211,
@@ -47,41 +48,42 @@ var venue = {
   },
   url: 'http://theoatmeal.com/'
 };
-// console.log(venue);
-// by title
-db.date.find({where: {id: dateId}}).then(function(date){
-  db.venue.findOrCreate({include: [db.date],
-    where: {name: venue.name}, defaults: {
-      url: venue.url,
-      lat: venue.location.lat,
-      lng: venue.location.lng,
-      address: venue.location.address,
-      city: venue.location.city,
-      state: venue.location.state,
-      zip: venue.location. postalCode
-    }}).spread(function(venue, created){
-      date.addVenue(venue).then(function(){
-      console.log(venue.get());
-      })
-    })
-})
-// by venue.id
+// // console.log(venue);
+// // by title
 // db.date.find({where: {id: dateId}}).then(function(date){
-//   db.venue.findOrCreate({include: [db.date], where: {id: venue.id}, defaults: {
-//     name: venue.name,
-//     url: venue.url,
-//     lat: venue.location.lat,
-//     lng: venue.location.lng,
-//     address: venue.location.address,
-//     city: venue.location.city,
-//     state: venue.location.state,
-//     zip: venue.location. postalCode
-//   }}).spread(function(venue, created){
-//     date.addVenue(venue).then(function(){
-//     console.log(venue.get());
+//   db.venue.findOrCreate({include: [db.date],
+//     where: {name: venue.name}, defaults: {
+//       apiId: venue.id
+//       url: venue.url,
+//       lat: venue.location.lat,
+//       lng: venue.location.lng,
+//       address: venue.location.address,
+//       city: venue.location.city,
+//       state: venue.location.state,
+//       zip: venue.location. postalCode
+//     }}).spread(function(venue, created){
+//       date.addVenue(venue).then(function(){
+//       console.log(venue.get());
+//       })
 //     })
-//   })
 // })
+// by venue.id
+db.date.find({where: {id: dateId}}).then(function(date){
+  db.venue.findOrCreate({include: [db.date], where: {apiId: venue.id}, defaults: {
+    name: venue.name,
+    url: venue.url,
+    lat: venue.location.lat,
+    lng: venue.location.lng,
+    address: venue.location.address,
+    city: venue.location.city,
+    state: venue.location.state,
+    zip: venue.location. postalCode
+  }}).spread(function(venue, created){
+    date.addVenue(venue).then(function(){
+    console.log(venue.get());
+    })
+  })
+})
 
 
 

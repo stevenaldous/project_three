@@ -11,14 +11,17 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      apiId: {
+        type: Sequelize.STRING
+      },
       url: {
         type: Sequelize.STRING
       },
       lat: {
-        type: Sequelize.DECIMAL(15, 15)
+        type: Sequelize.FLOAT
       },
       lng: {
-        type: Sequelize.DECIMAL(15, 15)
+        type: Sequelize.FLOAT
       },
       address: {
         type: Sequelize.STRING

@@ -6,3 +6,4 @@ added db test to test DB routes.
 
 added models date, user, venue, datesVenues
   -set model associatons
+  -dbtest.js file holds proper db findOrCreate for all tables. functional
