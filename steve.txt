@@ -1,0 +1,8 @@
+added views folder
+
+added views/main to give a home page for testing
+
+added db test to test DB routes.
+
+added models date, user, venue, datesVenues
+  -set model associatons

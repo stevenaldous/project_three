@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        models.date.belongsToMany(models.user);
+        models.date.belongsTo(models.user);
         models.date.belongsToMany(models.venue, {through: "datesVenues"});
       }
     }
