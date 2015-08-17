@@ -4,6 +4,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var passport = require('passport')
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
+var OAuth = require('node-oauth');
 // var ejsLayouts = require('express-ejs-layouts');
 var session = require('express-session');
 var flash = require('connect-flash');
