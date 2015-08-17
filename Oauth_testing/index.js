@@ -1,110 +1,123 @@
 var db = require('./models');
 var express = require('express');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var passport = require('passport')
-var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
-var OAuth = require('node-oauth');
-// var ejsLayouts = require('express-ejs-layouts');
 var session = require('express-session');
+var passport = require('passport');
 var flash = require('connect-flash');
-var FACEBOOK_APP_ID = '1658482547720054';
-var FACEBOOK_APP_SECRET = 'fb9781c4351e3bb832153d4b9c91538b'
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
+var NODE_ENV = process.env.NODE_ENV || 'development';
+var BASE_URL = (NODE_ENV === 'production') ? 'https://something.herokuapps.com' : 'http://localhost:3000';
+
+//configure express
 var app = express();
+app.set('view engine','ejs');
 
-// var moviesController = require("./controllers/movies");
-require('express-helpers')(app); // express helpers, used for link_to
-
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(__dirname + '/public')); // used for static files, like css
-// app.use(ejsLayouts);
-app.use(methodOverride('_method'))
+//load middleware
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(session({
-  secret: 'a;dkjsflkadsjflkas;fasldjf;asajfk',
-  resave: false,
-  saveUninitialized: true
+  secret: process.env.SESSION_SECRET,
+  resave:false,
+  saveUninitialized:true
 }));
-app.use(flash());
 app.use(passport.initialize());
-  app.use(passport.session());
+app.use(passport.session());
+app.use(flash());
 
-////////////////FACEBOOK PASSPORT//////////////////////
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
+app.use(function(req,res,next){
+  res.locals.alerts = req.flash();
+  next();
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+
+//store user in session
+passport.serializeUser(function(user,done){
+  done(null, user.id);
+});
+
+//retrieve user from session
+passport.deserializeUser(function(id,done){
+  db.user.findById(id).then(function(user){
+    done(null, user.get());
+  }).catch(done);
 });
 
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: BASE_URL + '/auth/callback/facebook',
+  profileFields: ['email','displayName']
+},function(accessToken, refreshToken, profile, done){
+  db.provider.find({
+    where:{
+      pid:profile.id,
+      type:profile.provider
+    },
+    include:[db.user]
+  }).then(function(provider){
+    if(provider && provider.user){
+      //login
+      provider.token = accessToken;
+      provider.save().then(function(){
+        done(null,provider.user.get());
+      });
+    }else{
+      //signup
+      // console.log(profile);
+      var email = profile.emails[0].value;
+      db.user.findOrCreate({
+        where:{email:email},
+        defaults:{email:email,name:profile.displayName}
+      }).spread(function(user,created){
+        if(created){
+          //user was created
+          user.createProvider({
+            pid:profile.id,
+            token:accessToken,
+            type:profile.provider
+          }).then(function(){
+            done(null,user.get());
+          })
+        }else{
+          //signup failed
+          done(null,false,{message:'You already signed up with this e-mail address. Please login.'})
+        }
+      });
+    }
+  });
+}));
 
-      // To keep the example simple, the user's Facebook profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Facebook account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+
+passport.use(new LocalStrategy({
+    usernameField:'email'
+  },
+  function(email,password,done){
+    db.user.find({where:{email:email}}).then(function(user){
+      if(user){
+        //found the user
+        user.checkPassword(password,function(err,result){
+          if(err) return done(err);
+          if(result){
+            //good password
+            done(null,user.get());
+          }else{
+            //bad password
+            done(null,false,{message: 'Invalid Password.'});
+          }
+        });
+      }else{
+        //didn't find the user
+        done(null,false,{message: 'Unknown user. Please sign up.'});
+      }
     });
   }
 ));
 
-//////////////////////////////////////////////////////
-
-app.use(function(req,res,next){
-  // req.session.user=7; //this line is for testing purposes make sure to comment it out before deploying
-  if(req.session.user){
-    db.user.findById(req.session.user).then(function(user){
-      req.currentUser = user;
-      next();
-    })
-  }else{
-    req.currentUser = false;
-    next();
-  }
-});
-
-app.use(function(req,res,next){
-  res.locals.currentUser = req.currentUser;
-  res.locals.alerts = req.flash();
-  next();
-})
-
-
-app.get('/', function(req, res){
-  res.render('auth/index');
-  // });
-});
-
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
-  function(req, res){
-    // The request will be redirected to Facebook for authentication, so this
-    // function will not be called.
-  });
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/auth/profile');
-  });
-// main controller
+//load routes
+app.use('/',require('./controllers/main.js'));
 app.use('/auth',require('./controllers/auth.js'));
 
-
-
-app.listen(process.env.PORT || 3000);
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}
+//listen for connections
+app.listen(3000);

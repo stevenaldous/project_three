@@ -2,6 +2,7 @@ var db = require('../models');
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var passport = require('passport');
 
 router.get('/',function(req,res){
   res.render('auth/index.ejs');
