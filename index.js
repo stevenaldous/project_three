@@ -9,16 +9,19 @@ var results = require('./models/4square.json')
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(ejsLayouts);
+
+app.set("layout extractScripts", true);
+
 app.use(express.static('assets'));
 
 app.get('/', function(req, res) {
   // added empty object to prevent front end error when trying to 
   // access undefined results obj
-  res.render('index', {results: {}});
+  res.render('index');
 });
 
 app.get('/search', function(req,res) {
-  res.render('search', {results: {}});
+  res.render('search');
 });
 
 app.get('/results', function(req,res) {

@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  window.app = <%- JSON.stringify(results) %>;
+
 
     L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXB0d28iLCJhIjoiOTYyMjYwM2ExYjU0" +
                            "MTNlNzMwMmYxZDhmNTNlMzBiZDIifQ.uILo4IfMpqra-O-NpKkbqw";
