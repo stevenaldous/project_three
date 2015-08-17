@@ -116,7 +116,8 @@ passport.use(new LocalStrategy({
 ));
 
 //load routes
-app.use('/',require('./controllers/main.js'));
+// app.use('/',require('./controllers/main.js'));
+
 app.use('/auth',require('./controllers/auth.js'));
 
 //listen for connections

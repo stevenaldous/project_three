@@ -1,46 +1,75 @@
 var db = require('../models');
 var express = require('express');
 var router = express.Router();
-var request = require('request');
 var passport = require('passport');
 
+//GET /auth/login
+//display login form
 router.get('/',function(req,res){
-  res.render('auth/index.ejs');
+  res.render('auth/index.ejs',{currentUser:req.user})
 })
 
-router.get('/login', function(req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('auth/login.ejs', { message: req.flash('loginMessage') });
+router.get('/login',function(req,res){
+    res.render('auth/login');
+});
+
+//POST /login
+//process login data and login user
+router.post('/login',function(req,res){
+  passport.authenticate(
+    'local',
+    {badRequestMessage:'You must enter e-mail and password.'},
+    function(err,user,info){
+      if(user){
+        req.login(user,function(err){
+          if(err) throw err;
+          req.flash('success','You are now logged in.');
+          res.redirect('/auth/profile');
+        });
+      }else{
+        req.flash('danger',info.message || 'Unknown error.');
+        res.redirect('/auth/login');
+      }
+    }
+  )(req,res);
+});
+
+router.get('/login/:provider',function(req,res){
+  passport.authenticate(
+    req.params.provider,
+    {scope:['public_profile','email']}
+  )(req,res);
+});
+
+router.get('/callback/:provider',function(req,res){
+
+  passport.authenticate(req.params.provider,function(err,user,info){
+    if(err) throw err;
+    if(user){
+      req.login(user,function(err){
+        if(err) throw err;
+        req.flash('success','You are now logged in.');
+        res.redirect('/auth/profile');
+      });
+    }else{
+      req.flash('danger',info.message || 'Unknown error.');
+      res.redirect('/auth/login');
+    }
+  })(req,res);
+});
+
+//GET /auth/signup
+//display sign up form
+router.get('/signup',function(req,res){
+    res.render('auth/signup');
 });
 
 router.get('/profile', function(req, res) {
-    res.render('auth/profile', {user:req.currentUser});
+    res.render('auth/profile', {currentUser:req.user});
 });
 
-router.post('/login',function(req,res){
-    //do login here (check password and set session value)
-    db.user.authenticate(req.body.email,req.body.password,
-      function(err,user){
-        if(err){
-          res.send(err);
-        } else if(user){
-          //user is logged in forward them to the home page
-          req.session.user = user.id;
-          req.flash('success','You\'re logged in')
-          res.redirect('/auth/profile');
-        } else {
-          req.flash('danger','invalid username or password');
-          res.redirect('/auth/login');
-        }
-    // res.send(req.body);
-    });
-});
-
-router.get('/signup', function(req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('auth/signup.ejs', { message: req.flash('signupMessage') });
-});
-
+//POST /auth/signup
+//create new user in database
 router.post('/signup',function(req,res){
   console.log('top of signup')
     //do sign up here (add user to database)
@@ -80,20 +109,13 @@ router.post('/signup',function(req,res){
     }
 });
 
+//GET /auth/logout
+//logout logged in user
 router.get('/logout',function(req,res){
-  req.flash('info','You have been logged out.');
-  req.session.user = false;
-  res.redirect('/');
+    req.logout();
+    req.flash('info','You have been logged out.');
+    res.redirect('/auth/index');
 });
 
-
-
-// app.post('/auth/facebook/token',
-//   passport.authenticate('facebook-token'),
-//   function (req, res) {
-//     // do something with req.user
-//     res.send(req.user? 200 : 401);
-//   }
-// );
 
 module.exports = router;
