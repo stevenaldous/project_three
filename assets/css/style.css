@@ -1,3 +1,9 @@
+body{
+  background-color: #C8B288;
+}
+#site-container{
+  margin-top: 50px;
+}
 #map{
 	height: 500px;
 	width: 500px;
