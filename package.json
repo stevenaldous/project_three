@@ -18,6 +18,7 @@
   "homepage": "https://github.com/branweb1/project_three#readme",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "cheerio": "^0.19.0",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "express-ejs-layouts": "^1.1.0",
