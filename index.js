@@ -4,6 +4,7 @@ var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 require('express-helpers')(app);
 var request = require('request');
+var db = require("./models");
 
 var results = require('./models/4square.json')
 var session = require('express-session');
