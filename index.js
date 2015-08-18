@@ -23,7 +23,8 @@ app.use('/users', require('./controllers/users.js'));
 app.use('/dates', require('./controllers/dates.js'));
 app.set("layout extractScripts", true);
 app.use(express.static('assets'));
-\\\\\\\\\\\\\\\\\\\ OAUTH PASSPORT \\\\\\\\\\\\\\\\\\\\\\\\
+
+// OAUTH
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave:false,
@@ -127,7 +128,7 @@ passport.use(new LocalStrategy({
 app.use('/auth',require('./controllers/auth.js'));
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+// END OAUTH
 
 app.use(function(req,res,next){
   res.locals.alerts = req.flash();

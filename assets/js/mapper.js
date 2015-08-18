@@ -1,6 +1,7 @@
-function drawMap(mapData){
+$(document).ready(function(){
 
-  $(document).ready(function(){
+  function drawMap(mapData){
+
 
       L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXB0d28iLCJhIjoiOTYyMjYwM2ExYjU0" +
                              "MTNlNzMwMmYxZDhmNTNlMzBiZDIifQ.uILo4IfMpqra-O-NpKkbqw";
