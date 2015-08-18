@@ -1,15 +1,14 @@
-<%# This form searches foursquare's api%>
-<form action="/results" method="GET" role="form">
+
+<form id="fucking" action="/results" method="GET" role="form">
   <legend>Form title</legend>
 
   <div class="form-group">
     <label for="">label</label>
-    <input name="what" type="text" class="form-control" id="" placeholder="Search for a restaurant">
+    <input name="what" type="text" class="form-control" id="restaurant" placeholder="Search for a restaurant">
   </div>
 
 
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="searchBtn btn btn-primary">Submit</button>
 </form>
 <%# This form searches eventfuls events API%>
 <form action="/eventsResults" method="GET" role="form">
@@ -22,5 +21,12 @@
 
 
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="searchBtn btn btn-primary">Submit</button>
 </form>
+<br>
+
+<%# <div class="jumbotron" id="map">
+
+</div>
+<div class="listings">
+</div>%>
