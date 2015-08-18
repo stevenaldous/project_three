@@ -90,11 +90,12 @@ passport.use(new LocalStrategy({
     usernameField:'email'
   },
   function(email,password,done){
+    email = 'tester1@gmail.com';
+    password = 'testtest';
     db.user.find({where:{email:email}}).then(function(user){
       if(user){
         //found the user
         currentUser = user
-        // console.log(currentUser)
         user.checkPassword(password,function(err,result){
           if(err) return done(err);
           if(result){
@@ -124,11 +125,10 @@ app.use(function(req,res,next){
 });
 
 
-app.use('/users', require('./controllers/users.js'));
 app.use('/dates', require('./controllers/dates.js'));
 app.use('/auth',require('./controllers/auth.js'));
 app.set("layout extractScripts", true);
-app.use(express.static('assets'));
+app.use(express.static(__dirname + '/assets'));
 //////////////////////////////////////////////////////////
 app.get('/', function(req, res) {
   res.render('main/index');
@@ -156,7 +156,6 @@ app.get('/results', function(req,res) {
   "&query=" + req.query.what);
 
   request(url, function(error, response, data) {
-    // res.send(JSON.parse(data));
     console.log(url);
     res.send(data);
   });
