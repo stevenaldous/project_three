@@ -113,7 +113,7 @@ function drawMap(mapData, api){
 
       // AJAX call to backend for the data
       var searchTerm = $('#restaurant').val();
-      $.getJSON('/results?what=' + searchTerm, function(searchData) {
+      $.getJSON('/dates/results?what=' + searchTerm, function(searchData) {
           drawMap(searchData, "foursquare");
       });
   });
@@ -133,7 +133,7 @@ function drawMap(mapData, api){
 
       // AJAX call to backend for the data
       var searchTerm = $('#not-restaurant').val();
-      $.getJSON('/eventsResults?keywords=' + searchTerm, function(searchData) {
+      $.getJSON('/dates/eventsResults?keywords=' + searchTerm, function(searchData) {
           drawMap(searchData, "eventful");
       });
   });
