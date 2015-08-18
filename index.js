@@ -181,7 +181,7 @@ app.get('/eventsResults', function(req,res) {
 "&where=" + seattle + "&within=" + radius + "&keywords=" + keywords)
 
     request(url, function(error, response, data) {
-        res.render('eventsResults', {data:JSON.parse(data)});
+            res.send(data);
     });
 
 })
