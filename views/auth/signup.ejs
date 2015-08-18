@@ -2,14 +2,6 @@
 
     <h1><span class="fa fa-sign-in"></span> Signup</h1>
 
-    <!-- show any messages that come back with authentication -->
-    <% if(typeof alerts !== 'undefined'){ %>
-    <% for(key in alerts){ %>
-        <% alerts[key].forEach(function(thisMsg){ %>
-            <div class="alert alert-<%= key %>"><%= thisMsg %></div>
-        <% }); %>
-    <% } %>
-    <% } %>
 
     <!-- LOGIN FORM -->
     <form action="/auth/signup" method="post">
