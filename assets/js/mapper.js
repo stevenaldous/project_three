@@ -1,6 +1,7 @@
+ $(document).ready(function(){
+
 function drawMap(mapData){
 
-  $(document).ready(function(){
 
       L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXB0d28iLCJhIjoiOTYyMjYwM2ExYjU0" +
                              "MTNlNzMwMmYxZDhmNTNlMzBiZDIifQ.uILo4IfMpqra-O-NpKkbqw";
@@ -27,7 +28,7 @@ function drawMap(mapData){
               'marker-symbol': 'marker',
               'marker-size': 'medium'
             }),
-            'title': venue.name, 
+            'title': venue.name,
             'idx' : i
           })
         .bindPopup('<strong><a href="https://foursquare.com/v/' + venue.id + '">' +
@@ -55,7 +56,17 @@ function drawMap(mapData){
             };
         });
 
-  });
 }
+$('.searchBtn').on('click', function(e) {
+    e.preventDefault();
+    var searchTerm = $('#restaurant').val();
+    $('.jumbotron').html('');
+    $.getJSON('/results?what=' + searchTerm, function(searchData) {
+
+        console.log(searchData);
+    drawMap(searchData);
+})
+})
+  });
 
 //$('.myform').on('submit'...)

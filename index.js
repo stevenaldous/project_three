@@ -46,7 +46,8 @@ app.get('/results', function(req,res) {
 
   request(url, function(error, response, data) {
     // res.send(JSON.parse(data));
-    res.render('results', { results: JSON.parse(data) });
+    console.log(url);
+    res.send(data);
   });
 });
 
@@ -71,7 +72,3 @@ app.get('/eventsResults', function(req,res) {
 app.listen(process.env.PORT || 3000, function(){
   console.log("You're lisening to the smooth sounds of Port 3000")
 });
-
-
-
-
