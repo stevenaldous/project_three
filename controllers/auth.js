@@ -3,18 +3,16 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
-//GET /auth/login
-//display login form
+//GET /auth--display auth index form
 router.get('/',function(req,res){
   res.render('auth/index.ejs',{currentUser:req.user})
 })
-
+//GET /auth/login--display
 router.get('/login',function(req,res){
     res.render('auth/login');
 });
 
-//POST /login
-//process login data and login user
+//POST /auth/login --process login data and login user
 router.post('/login',function(req,res){
   passport.authenticate(
     'local',
@@ -23,8 +21,10 @@ router.post('/login',function(req,res){
       if(user){
         req.login(user,function(err){
           if(err) throw err;
+          req.session.user = user;
+          // console.log(user.id)
           req.flash('success','You are now logged in.');
-          res.redirect('/auth/profile');
+          res.redirect('/dates');
         });
       }else{
         req.flash('danger',info.message || 'Unknown error.');
@@ -34,15 +34,15 @@ router.post('/login',function(req,res){
   )(req,res);
 });
 
+//OAUTH authentication
 router.get('/login/:provider',function(req,res){
   passport.authenticate(
     req.params.provider,
     {scope:['public_profile','email']}
   )(req,res);
 });
-
+//gets callback from facebook
 router.get('/callback/:provider',function(req,res){
-
   passport.authenticate(req.params.provider,function(err,user,info){
     if(err) throw err;
     if(user){
@@ -58,12 +58,11 @@ router.get('/callback/:provider',function(req,res){
   })(req,res);
 });
 
-//GET /auth/signup
-//display sign up form
+//GET /auth/signup--/display sign up form
 router.get('/signup',function(req,res){
     res.render('auth/signup');
 });
-
+//loads profile page
 router.get('/profile', function(req, res) {
     res.render('auth/profile', {currentUser:req.user});
 });
@@ -109,12 +108,12 @@ router.post('/signup',function(req,res){
     }
 });
 
-//GET /auth/logout
-//logout logged in user
+//GET /auth/logout--logout logged in user
 router.get('/logout',function(req,res){
+    req.session.user = undefined;
     req.logout();
     req.flash('info','You have been logged out.');
-    res.redirect('/auth/index');
+    res.redirect('/');
 });
 
 
