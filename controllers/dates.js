@@ -7,7 +7,8 @@ var db = require('../models');
 router.get('/', function(req, res){
    var userId = 4;
   // var userId = currentUser.id
-  db.date.findAll({where: {userId: currentUser.id}}).then(function(dates){
+  db.date.findAll({where: {userId: currentUser.id},
+    order: [['createdAt','DESC']]}).then(function(dates){
     res.render('dates/index', {myDates: dates});
   });
 });
