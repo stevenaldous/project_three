@@ -9,3 +9,13 @@
   <button type="submit" class="btn btn-primary">Start</button>
 </form>
 
+<% myDates.forEach(function(date){ %>
+  <div class="well">
+    <div class="row">
+      <h3><%= date.title %></h3>
+      <form method='post' action="/dates/<%= date.id %>?_method=delete">
+        <button type='submit' class='btn btn-danger glyphicon glyohicon-trash' ></button>
+      </form>
+    </div>
+  </div>
+<% }); %>

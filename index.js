@@ -13,9 +13,11 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var BASE_URL = (NODE_ENV === 'production') ? 'https://something.herokuapps.com' : 'http://localhost:3000';
 var db = require("./models");
+var methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 app.use(ejsLayouts);
 // OAUTH
 app.use(session({
