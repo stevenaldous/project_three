@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function(){
 
 function drawMap(mapData, api){
@@ -49,60 +52,75 @@ function drawMap(mapData, api){
         link.href = '#';
         link.className = 'title';
         link.innerHTML = layer._icon.title;
-        var form = listing.appendChild(document.createElement("form"));
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "/dates/search");
-        var formField = form.appendChild(document.createElement("input"));
-        formField.setAttribute("name", "name");
-        formField.setAttribute("type", "hidden");
-        formField.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].name);
 
-        var formField2 = form.appendChild(document.createElement("input"));
-        formField2.setAttribute("name", "apiId");
-        formField2.setAttribute("type", "hidden");
-        formField2.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].id);
+        var myObj = {};
+        myObj.name = mapData.response.venues[layer.options.idx].name;
+        myObj.apiId = mapData.response.venues[layer.options.idx].id;
+        myObj.lat = mapData.response.venues[layer.options.idx].location.lat
+        myObj.lng = mapData.response.venues[layer.options.idx].location.lng
+        myObj.address = mapData.response.venues[layer.options.idx].location.address
+        myObj.city = mapData.response.venues[layer.options.idx].location.city
+        myObj.state = mapData.response.venues[layer.options.idx].location.state;
+        myObj.zip = mapData.response.venues[layer.options.idx].location.postalCode
 
-        var formField3 = form.appendChild(document.createElement("input"));
-        formField3.setAttribute("name", "lat");
-        formField3.setAttribute("type", "hidden");
-        formField3.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].location.lat);
+        var ccx = formCreator("post", "/dates/search", myObj);
 
-        var formField4 = form.appendChild(document.createElement("input"));
-        formField4.setAttribute("name", "lng");
-        formField4.setAttribute("type", "hidden");
-        formField4.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].location.lng);
+        console.log(ccx);
 
-        var formField5 = form.appendChild(document.createElement("input"));
-        formField5.setAttribute("name", "address");
-        formField5.setAttribute("type", "hidden");
-        formField5.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].location.address);
+        // var form = listing.appendChild(document.createElement("form"));
+        // form.setAttribute("method", "post");
+        // form.setAttribute("action", "/dates/search");
+        // var formField = form.appendChild(document.createElement("input"));
+        // formField.setAttribute("name", "name");
+        // formField.setAttribute("type", "hidden");
+        // formField.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].name);
 
-        var formField6 = form.appendChild(document.createElement("input"));
-        formField6.setAttribute("name", "city");
-        formField6.setAttribute("type", "hidden");
-        formField6.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].location.city);
+        // var formField2 = form.appendChild(document.createElement("input"));
+        // formField2.setAttribute("name", "apiId");
+        // formField2.setAttribute("type", "hidden");
+        // formField2.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].id);
 
-        var formField7 = form.appendChild(document.createElement("input"));
-        formField7.setAttribute("name", "state");
-        formField7.setAttribute("type", "hidden");
-        formField7.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].location.state);
+        // var formField3 = form.appendChild(document.createElement("input"));
+        // formField3.setAttribute("name", "lat");
+        // formField3.setAttribute("type", "hidden");
+        // formField3.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].location.lat);
 
-        var formField8 = form.appendChild(document.createElement("input"));
-        formField8.setAttribute("name", "zip");
-        formField8.setAttribute("type", "hidden");
-        formField8.setAttribute("value", mapData.response
-                                        .venues[layer.options.idx].location.postalCode);
+        // var formField4 = form.appendChild(document.createElement("input"));
+        // formField4.setAttribute("name", "lng");
+        // formField4.setAttribute("type", "hidden");
+        // formField4.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].location.lng);
 
-        var button = form.appendChild(document.createElement("button"))
-        button.setAttribute("type", "submit");
-        button.innerHTML = "Add to Date";
+        // var formField5 = form.appendChild(document.createElement("input"));
+        // formField5.setAttribute("name", "address");
+        // formField5.setAttribute("type", "hidden");
+        // formField5.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].location.address);
+
+        // var formField6 = form.appendChild(document.createElement("input"));
+        // formField6.setAttribute("name", "city");
+        // formField6.setAttribute("type", "hidden");
+        // formField6.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].location.city);
+
+        // var formField7 = form.appendChild(document.createElement("input"));
+        // formField7.setAttribute("name", "state");
+        // formField7.setAttribute("type", "hidden");
+        // formField7.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].location.state);
+
+        // var formField8 = form.appendChild(document.createElement("input"));
+        // formField8.setAttribute("name", "zip");
+        // formField8.setAttribute("type", "hidden");
+        // formField8.setAttribute("value", mapData.response
+        //                                 .venues[layer.options.idx].location.postalCode);
+
+        // var button = form.appendChild(document.createElement("button"))
+        // button.setAttribute("type", "submit");
+        // button.innerHTML = "Add to Date";
 
         link.onclick = function() {
               console.log('item data',mapData.response.venues[layer.options.idx])
@@ -240,7 +258,22 @@ function drawMap(mapData, api){
           drawMap(searchData, "eventful");
       });
   });
-
-
 });
+
+var formCreator = function(method, action, values){
+  var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", action);
+
+  for (var keyName in values) {
+      var formField = form.appendChild(document.createElement("input"));
+        formField.setAttribute("name", keyName);
+        formField.setAttribute("type", "hidden");
+        formField.setAttribute("value", values[keyName]);
+
+      var button = form.appendChild(document.createElement("button"))
+        button.setAttribute("type", "submit");
+        button.innerHTML = "Add to Date";
+  }
+};
 
