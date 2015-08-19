@@ -11,3 +11,8 @@ body{
 .jumbotron{
   background-color: #C8B288;
 }
+.glyphicon-remove{
+  margin-top: 15px;
+  background: none;
+  border: none;
+}

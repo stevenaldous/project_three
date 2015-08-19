@@ -6,7 +6,7 @@ function drawMap(mapData, api){
 
       L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXB0d28iLCJhIjoiOTYyMjYwM2ExYjU0" +
                              "MTNlNzMwMmYxZDhmNTNlMzBiZDIifQ.uILo4IfMpqra-O-NpKkbqw";
-      
+
     // initializes a map in the container created above
       var map = L.mapbox.map("map", "grouptwo.e32d16b4");
       map.setView([47.6097,-122.3331], 12);
@@ -68,12 +68,13 @@ function drawMap(mapData, api){
         foursquareObj.state = mapData.response.venues[layer.options.idx].location.state;
         foursquareObj.zip = mapData.response.venues[layer.options.idx].location.postalCode
         foursquareObj.dateID = $("#dateID").val();
+        foursquareObj.url = "https://foursquare.com/v/" + foursquareObj.apiId;
 
 
         var foursquareForm = formCreator(foursquareObj);
 
         listing.appendChild(foursquareForm);
-        
+
 
         link.onclick = function() {
                map.setView(layer.getLatLng(), 14);
@@ -115,7 +116,7 @@ function drawMap(mapData, api){
 
         var eventfulObj = {};
         eventfulObj.name = mapData.events.event[layer.options.idx].title;
-        eventfulObj.apiId = mapData.events.event[layer.options.idx].id; 
+        eventfulObj.apiId = mapData.events.event[layer.options.idx].id;
         eventfulObj.lat = mapData.events.event[layer.options.idx].latitude;
         eventfulObj.lng = mapData.events.event[layer.options.idx].longitude;
         eventfulObj.address = mapData.events.event[layer.options.idx].venue_address;
@@ -151,7 +152,7 @@ function drawMap(mapData, api){
   $('#searchBtn1').on('click', function(e) {
       e.preventDefault();
 
-      // If DOM element linked to map exits, 
+      // If DOM element linked to map exits,
       // remove that element from the DOM
       if (typeof map != "undefined") {
         map.remove();
@@ -171,7 +172,7 @@ function drawMap(mapData, api){
   $('#searchBtn2').on('click', function(e) {
       e.preventDefault();
 
-      // If DOM element linked to map exits, 
+      // If DOM element linked to map exits,
       // remove that element from the DOM
       if (typeof map != "undefined") {
         map.remove();

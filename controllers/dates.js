@@ -5,14 +5,9 @@ var db = require('../models');
 
 //get /dates dates home page
 router.get('/', function(req, res){
-  var userId = currentUser.id
-  // var myDates = [];
-  // res.render('dates/index')
-  // res.send(userId)
+   var userId = 4;
+  // var userId = currentUser.id
   db.date.findAll({where: {userId: currentUser.id}}).then(function(dates){
-
-      // myDates.push(dates);
-        // res.send(dates)
     res.render('dates/index', {myDates: dates});
   });
 });
@@ -25,12 +20,10 @@ router.get('/results', function(req,res) {
   var fourSquareId = process.env.FOURSQUARE_ID;
   var fourSquareSecret = process.env.FOURSQUARE_SECRET;
   var seattle = '47.6097,-122.3331';
-
   var url = ("https://api.foursquare.com/v2/venues/search?client_id=" +
    fourSquareId + "&client_secret=" + fourSquareSecret + "&v=20130815" +
    "&ll=" + seattle +
   "&query=" + req.query.what);
-
   request(url, function(error, response, data) {
     // res.send(JSON.parse(data));
     console.log(url);
@@ -58,7 +51,7 @@ router.post("/:id/search", function(req,res){
   db.date.find({where: {id: req.body.dateID}}).then(function(date){
   db.venue.findOrCreate({include: [db.date], where: {apiId: req.body.apiId}, defaults: {
     name: req.body.name,
-    // url: body.url,
+    url: req.body.url,
     lat: req.body.lat,
     lng: req.body.lng,
     address: req.body.address,
@@ -75,8 +68,7 @@ router.post("/:id/search", function(req,res){
 
 //post create new date
 router.post('/', function(req, res){
-  var userId = 1;
-  //   var userId = currentUser.id;
+  var userId = currentUser.id;
   db.user.find({where: {id: userId}}).then(function(user){
    db.date.findOrCreate({ where: {title: req.body.name},
     defaults: {userId: user.id}
@@ -86,9 +78,17 @@ router.post('/', function(req, res){
   });
 });
 
-//get /dates/:id/search
+// get /dates/:id/search
 router.get('/:id/search', function(req, res){
   res.render('dates/search', {dateID: req.params.id});
+})
+//get /dates/:id -- show user dates specifics
+router.get('/:id', function(req, res){
+  db.date.findAll({where: {id: req.params.id}, include: [db.venue]}).then(function(date){
+    // res.send(date);
+    res.render('dates/show', {myDate: date});
+  })
+
 })
 
 //delete dates from user dates
@@ -97,6 +97,7 @@ router.delete('/:id', function(req, res){
     res.redirect('/dates');
   });
 });
+
 
 
 module.exports=router;
