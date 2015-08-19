@@ -63,7 +63,9 @@ router.post("/:id/search", function(req,res){
   }}).spread(function(venue, created){
     date.addVenue(venue).then(function(){
     // console.log(venue.get());
-    res.send("You did it!");
+    // var backURL=req.header('Referer') || '/';
+    // res.redirect(backURL);
+    res.send({result: true, venue: venue})
     })
   })
 })

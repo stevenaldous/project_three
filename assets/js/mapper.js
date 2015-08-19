@@ -170,6 +170,18 @@ function drawMap(mapData, api){
       });
   });
 
+  $(".listings").on("submit", "form", function(e){
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/dates/" + $("#dateID").val() + "/search" ,
+      data: $(this).serialize(),
+      success: function(response){
+        console.log(response);
+      }
+    });
+  });
+
 }); // end doc.ready function
 
 var formCreator = function(method, action, values){
@@ -187,6 +199,7 @@ var formCreator = function(method, action, values){
   var button = form.appendChild(document.createElement("button"))
   button.setAttribute("type", "submit");
   button.innerHTML = "Add to Date";
+
 
   return form;
 };
