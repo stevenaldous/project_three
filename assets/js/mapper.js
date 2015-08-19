@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function(){
 
 function drawMap(mapData, api){
@@ -16,7 +13,7 @@ function drawMap(mapData, api){
 
 
   // add empty layer to map
-      var foursquarePlaces = L.layerGroup().addTo(map);
+      var myMapLayers = L.layerGroup().addTo(map);
 
   // grab container for search results
       var listings = document.querySelector(".listings");
@@ -37,21 +34,21 @@ function drawMap(mapData, api){
               'title': venue.name,
               'idx' : i
             })
-          .bindPopup('<strong><a href="https://foursquare.com/v/' + venue.id + '">' +
-            venue.name + '</a></strong>')
-            .addTo(foursquarePlaces);
+          .bindPopup('<strong><a href="https://foursquare.com/v/' + venue.id +
+                     '">' + venue.name + '</a></strong>')
+            .addTo(myMapLayers);
         }
 
       // loop through layers, grabing info from each layer and building
       // a list item with it
-      foursquarePlaces.eachLayer(function(layer) {
+      myMapLayers.eachLayer(function(layer) {
         // console.log(layer);
         var listing = listings.appendChild(document.createElement('div'));
         listing.className = 'item';
         var link = listing.appendChild(document.createElement('a'));
         link.href = '#';
         link.className = 'title';
-        link.innerHTML = layer._icon.title;
+        link.innerHTML = mapData.response.venues[layer.options.idx].name;
 
         var foursquareObj = {};
         foursquareObj.name = mapData.response.venues[layer.options.idx].name;
@@ -69,7 +66,6 @@ function drawMap(mapData, api){
         
 
         link.onclick = function() {
-              console.log('item data',mapData.response.venues[layer.options.idx])
                map.setView(layer.getLatLng(), 14);
                layer.openPopup();
                // kills the link functionality so it doesn't just to the top
@@ -93,19 +89,19 @@ function drawMap(mapData, api){
             })
           .bindPopup('<strong><a href="' + event.url + '">' +
             event.title + '</a></strong>')
-            .addTo(foursquarePlaces);
+            .addTo(myMapLayers);
         }
 
       // loop through layers, grabing info from each layer and building
       // a list item with it
-      foursquarePlaces.eachLayer(function(layer) {
+      myMapLayers.eachLayer(function(layer) {
         // console.log(layer);
         var listing = listings.appendChild(document.createElement('div'));
         listing.className = 'item';
         var link = listing.appendChild(document.createElement('a'));
         link.href = '#';
         link.className = 'title';
-        link.innerHTML = layer._icon.title;
+        link.innerHTML = mapData.events.event[layer.options.idx].title;
 
         var eventfulObj = {};
         eventfulObj.name = mapData.events.event[layer.options.idx].title;
@@ -121,56 +117,8 @@ function drawMap(mapData, api){
 
         listing.appendChild(eventfulForm);
 
-
-        // var form = listing.appendChild(document.createElement("form"));
-        // form.setAttribute("method", "post");
-        // form.setAttribute("action", "/dates/search");
-        // var formField = form.appendChild(document.createElement("input"));
-        // formField.setAttribute("name", "name");
-        // formField.setAttribute("type", "hidden");
-        // formField.setAttribute("value", mapData.events.event[layer.options.idx].title);
-
-        // var formField2 = form.appendChild(document.createElement("input"));
-        // formField2.setAttribute("name", "apiId");
-        // formField2.setAttribute("type", "hidden");
-        // formField2.setAttribute("value", mapData.events.event[layer.options.idx].id);
-
-        // var formField3 = form.appendChild(document.createElement("input"));
-        // formField3.setAttribute("name", "lat");
-        // formField3.setAttribute("type", "hidden");
-        // formField3.setAttribute("value", mapData.events.event[layer.options.idx].latitude);
-
-        // var formField4 = form.appendChild(document.createElement("input"));
-        // formField4.setAttribute("name", "lng");
-        // formField4.setAttribute("type", "hidden");
-        // formField4.setAttribute("value", mapData.events.event[layer.options.idx].longitude);
-
-        // var formField5 = form.appendChild(document.createElement("input"));
-        // formField5.setAttribute("name", "address");
-        // formField5.setAttribute("type", "hidden");
-        // formField5.setAttribute("value", mapData.events.event[layer.options.idx].venue_address);
-
-        // var formField6 = form.appendChild(document.createElement("input"));
-        // formField6.setAttribute("name", "city");
-        // formField6.setAttribute("type", "hidden");
-        // formField6.setAttribute("value", mapData.events.event[layer.options.idx].city_name);
-
-        // var formField7 = form.appendChild(document.createElement("input"));
-        // formField7.setAttribute("name", "state");
-        // formField7.setAttribute("type", "hidden");
-        // formField7.setAttribute("value", mapData.events.event[layer.options.idx].region_abbr);
-
-        // var formField8 = form.appendChild(document.createElement("input"));
-        // formField8.setAttribute("name", "zip");
-        // formField8.setAttribute("type", "hidden");
-        // formField8.setAttribute("value", mapData.events.event[layer.options.idx].postal_code);
-
-        // var button = form.appendChild(document.createElement("button"))
-        // button.setAttribute("type", "submit");
-        // button.innerHTML = "Add to Date";
-
         link.onclick = function() {
-              console.log('item data',mapData.events.event[layer.options.idx])
+              // console.log('item data',mapData.events.event[layer.options.idx])
                map.setView(layer.getLatLng(), 14);
                layer.openPopup();
                // kills the link functionality so it doesn't just to the top
@@ -179,7 +127,7 @@ function drawMap(mapData, api){
             };
         });
     }
-}
+  }
 
   $('#searchBtn1').on('click', function(e) {
       e.preventDefault();
@@ -219,7 +167,8 @@ function drawMap(mapData, api){
           drawMap(searchData, "eventful");
       });
   });
-});
+
+}); // end doc.ready function
 
 var formCreator = function(method, action, values){
   var form = document.createElement("form");
