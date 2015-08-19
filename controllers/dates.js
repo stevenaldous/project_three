@@ -5,11 +5,16 @@ var db = require('../models');
 
 //get /dates dates home page
 router.get('/', function(req, res){
-  res.render('dates/index')
-  // res.send(currentUser)
-  // db.date.findAll({where: {userId: currentUser.id}}).then(function(dates){
-  //   res.render('dates/index', {myDates: dates});
-  // });
+  var userId = currentUser.id
+  // var myDates = [];
+  // res.render('dates/index')
+  // res.send(userId)
+  db.date.findAll({where: {userId: currentUser.id}}).then(function(dates){
+
+      // myDates.push(dates);
+        // res.send(dates)
+    res.render('dates/index', {myDates: dates});
+  });
 });
 
 router.get('/search', function(req,res) {
@@ -85,5 +90,13 @@ router.post('/', function(req, res){
 router.get('/:id/search', function(req, res){
   res.render('dates/search', {dateID: req.params.id});
 })
+
+//delete dates from user dates
+router.delete('/:id', function(req, res){
+  db.date.destroy({where: {id: req.params.id}}).then(function(){
+    res.redirect('/dates');
+  });
+});
+
 
 module.exports=router;

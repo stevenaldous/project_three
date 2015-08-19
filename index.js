@@ -13,9 +13,10 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var BASE_URL = (NODE_ENV === 'production') ? 'https://something.herokuapps.com' : 'http://localhost:3000';
 var db = require("./models");
-
+var methodOverride = require('method-override');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 app.use(ejsLayouts);
 // OAUTH
 app.use(session({
@@ -61,7 +62,6 @@ passport.use(new FacebookStrategy({
       });
     }else{
       //signup
-      // console.log(profile);
       var email = profile.emails[0].value;
       db.user.findOrCreate({
         where:{email:email},
@@ -97,12 +97,10 @@ passport.use(new LocalStrategy({
         user.checkPassword(password,function(err,result){
           if(err) return done(err);
           if(result){
-            // currentUser = true;
             //good password
             done(null,user.get());
           }else{
             //bad password
-            // currentUser = false;
             done(null,false,{message: 'Invalid Password.'});
           }
         });
@@ -113,7 +111,6 @@ passport.use(new LocalStrategy({
     });
   }
 ));
-
 // END OAUTH
 
 app.use(function(req,res,next){
