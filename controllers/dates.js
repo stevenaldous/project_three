@@ -45,6 +45,10 @@ router.get('/eventsResults', function(req,res) {
 
 })
 
+router.post("/search", function(req,res){
+  res.send(req.body);
+});
+
 //post create new date
 router.post('/', function(req, res){
   var userId = 1;
