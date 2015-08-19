@@ -12,10 +12,15 @@
 <% myDates.forEach(function(date){ %>
   <div class="well">
     <div class="row">
-      <h3><%= date.title %></h3>
-      <form method='post' action="/dates/<%= date.id %>?_method=delete">
-        <button type='submit' class='btn btn-danger glyphicon glyohicon-trash' ></button>
-      </form>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <h3><%- link_to(date.title, '/dates/'+date.id) %></h3>
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <form method='post' action="/dates/<%= date.id %>?_method=delete">
+          <button type='submit' class='btn btn-danger glyphicon glyohicon-trash' ></button>
+        </form>
+      </div>
+
     </div>
   </div>
 <% }); %>

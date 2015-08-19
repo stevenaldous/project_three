@@ -36,6 +36,11 @@ router.get('/:id/search', function(req, res){
   res.render('dates/search');
 })
 
+//get /dates/:id/show
+router.get('/:id', function(req, res){
+  res.render('dates/show')
+})
+
 //delete dates from user dates
 router.delete('/:id', function(req, res){
   db.date.destroy({where: {id: req.params.id}}).then(function(){
