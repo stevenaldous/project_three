@@ -62,7 +62,7 @@ function drawMap(mapData, api){
         foursquareObj.dateID = $("#dateID").val();
 
 
-        var foursquareForm = formCreator("post", "/dates/" + $("#dateID").val() + "/search", foursquareObj);
+        var foursquareForm = formCreator(foursquareObj);
 
         listing.appendChild(foursquareForm);
         
@@ -114,8 +114,10 @@ function drawMap(mapData, api){
         eventfulObj.city = mapData.events.event[layer.options.idx].city_name;
         eventfulObj.state = mapData.events.event[layer.options.idx].region_abbr;
         eventfulObj.zip = mapData.events.event[layer.options.idx].postal_code;
+        eventfulObj.dateID = $("#dateID").val();
 
-        var eventfulForm = formCreator("post", "/dates/search", eventfulObj);
+
+        var eventfulForm = formCreator(eventfulObj);
 
         listing.appendChild(eventfulForm);
 
@@ -184,10 +186,8 @@ function drawMap(mapData, api){
 
 }); // end doc.ready function
 
-var formCreator = function(method, action, values){
+var formCreator = function(values){
   var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", action);
 
   for (var keyName in values) {
       var formField = form.appendChild(document.createElement("input"));

@@ -62,10 +62,7 @@ router.post("/:id/search", function(req,res){
     zip: req.body.postalCode
   }}).spread(function(venue, created){
     date.addVenue(venue).then(function(){
-    // console.log(venue.get());
-    // var backURL=req.header('Referer') || '/';
-    // res.redirect(backURL);
-    res.send({result: true, venue: venue})
+      res.send({result: true, venue: venue});
     })
   })
 })
