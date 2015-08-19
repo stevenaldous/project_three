@@ -2,6 +2,9 @@ body{
   background-color: #C8B288;
 }
 
+/*Big video wrap holds background video*/
+/*It must be set to fixed for the bs3 top level wraper to display on top*/
+/*It also needs a z-index below that of other elements*/
 #big-video-wrap {
   z-index: -5;
   position: fixed;
