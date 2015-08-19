@@ -1,8 +1,14 @@
 body{
   background-color: #C8B288;
 }
+
+#big-video-wrap {
+  z-index: -5;
+  position: fixed;
+}
 #site-container{
   margin-top: 50px;
+  z-index: 20;
 }
 #map{
 	height: 500px;
