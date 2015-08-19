@@ -59,8 +59,10 @@ function drawMap(mapData, api){
         foursquareObj.city = mapData.response.venues[layer.options.idx].location.city
         foursquareObj.state = mapData.response.venues[layer.options.idx].location.state;
         foursquareObj.zip = mapData.response.venues[layer.options.idx].location.postalCode
+        foursquareObj.dateID = $("#dateID").val();
 
-        var foursquareForm = formCreator("post", "/dates/search", foursquareObj);
+
+        var foursquareForm = formCreator("post", "/dates/" + $("#dateID").val() + "/search", foursquareObj);
 
         listing.appendChild(foursquareForm);
         
