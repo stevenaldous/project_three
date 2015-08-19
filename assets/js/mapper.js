@@ -102,7 +102,7 @@ function drawMap(mapData, api){
 
         var button = form.appendChild(document.createElement("button"))
         button.setAttribute("type", "submit");
-        button.innerHTML = "Add to Favorites";
+        button.innerHTML = "Add to Date";
 
         link.onclick = function() {
               console.log('item data',mapData.response.venues[layer.options.idx])
@@ -142,6 +142,54 @@ function drawMap(mapData, api){
         link.href = '#';
         link.className = 'title';
         link.innerHTML = layer._icon.title;
+
+        var form = listing.appendChild(document.createElement("form"));
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/dates/search");
+        var formField = form.appendChild(document.createElement("input"));
+        formField.setAttribute("name", "name");
+        formField.setAttribute("type", "hidden");
+        formField.setAttribute("value", mapData.events.event[layer.options.idx].title);
+
+        var formField2 = form.appendChild(document.createElement("input"));
+        formField2.setAttribute("name", "apiId");
+        formField2.setAttribute("type", "hidden");
+        formField2.setAttribute("value", mapData.events.event[layer.options.idx].id);
+
+        var formField3 = form.appendChild(document.createElement("input"));
+        formField3.setAttribute("name", "lat");
+        formField3.setAttribute("type", "hidden");
+        formField3.setAttribute("value", mapData.events.event[layer.options.idx].latitude);
+
+        var formField4 = form.appendChild(document.createElement("input"));
+        formField4.setAttribute("name", "lng");
+        formField4.setAttribute("type", "hidden");
+        formField4.setAttribute("value", mapData.events.event[layer.options.idx].longitude);
+
+        var formField5 = form.appendChild(document.createElement("input"));
+        formField5.setAttribute("name", "address");
+        formField5.setAttribute("type", "hidden");
+        formField5.setAttribute("value", mapData.events.event[layer.options.idx].venue_address);
+
+        var formField6 = form.appendChild(document.createElement("input"));
+        formField6.setAttribute("name", "city");
+        formField6.setAttribute("type", "hidden");
+        formField6.setAttribute("value", mapData.events.event[layer.options.idx].city_name);
+
+        var formField7 = form.appendChild(document.createElement("input"));
+        formField7.setAttribute("name", "state");
+        formField7.setAttribute("type", "hidden");
+        formField7.setAttribute("value", mapData.events.event[layer.options.idx].region_abbr);
+
+        var formField8 = form.appendChild(document.createElement("input"));
+        formField8.setAttribute("name", "zip");
+        formField8.setAttribute("type", "hidden");
+        formField8.setAttribute("value", mapData.events.event[layer.options.idx].postal_code);
+
+        var button = form.appendChild(document.createElement("button"))
+        button.setAttribute("type", "submit");
+        button.innerHTML = "Add to Date";
+
         link.onclick = function() {
               console.log('item data',mapData.events.event[layer.options.idx])
                map.setView(layer.getLatLng(), 14);
