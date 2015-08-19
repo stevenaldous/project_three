@@ -49,25 +49,42 @@ router.get('/eventsResults', function(req,res) {
 
 })
 
-router.post("/search", function(req,res){
-  res.send(req.body);
+router.post("/:id/search", function(req,res){
+  db.date.find({where: {id: req.body.dateID}}).then(function(date){
+  db.venue.findOrCreate({include: [db.date], where: {apiId: req.body.apiId}, defaults: {
+    name: req.body.name,
+    // url: body.url,
+    lat: req.body.lat,
+    lng: req.body.lng,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.postalCode
+  }}).spread(function(venue, created){
+    date.addVenue(venue).then(function(){
+    // console.log(venue.get());
+    res.send("You did it!");
+    })
+  })
+})
 });
 
 //post create new date
 router.post('/', function(req, res){
-  var userId = currentUser.id;
+  var userId = 1;
+  //   var userId = currentUser.id;
   db.user.find({where: {id: userId}}).then(function(user){
    db.date.findOrCreate({ where: {title: req.body.name},
     defaults: {userId: user.id}
   }).spread(function(date, created){
-    res.redirect('/dates/'+date.id)
+    res.redirect('/dates/'+date.id + '/search')
     });
   });
 });
 
 //get /dates/:id/search
 router.get('/:id/search', function(req, res){
-  res.render('dates/search')
+  res.render('dates/search', {dateID: req.params.id});
 })
 
 module.exports=router;

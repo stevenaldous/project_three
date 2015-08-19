@@ -90,8 +90,6 @@ passport.use(new LocalStrategy({
     usernameField:'email'
   },
   function(email,password,done){
-    email = 'tester1@gmail.com';
-    password = 'testtest';
     db.user.find({where:{email:email}}).then(function(user){
       if(user){
         //found the user
