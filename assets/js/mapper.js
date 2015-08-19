@@ -27,15 +27,15 @@ function drawMap(mapData, api){
           var latlng = L.latLng(venue.location.lat, venue.location.lng);
           var marker = L.marker(latlng, {
               icon: L.mapbox.marker.icon({
-                'marker-color': '#800000',
-                'marker-symbol': 'marker',
-                'marker-size': 'medium'
+                "marker-color": "#800000",
+                "marker-symbol": "marker",
+                "marker-size": "medium"
               }),
-              'title': venue.name,
-              'idx' : i
+              "title": venue.name,
+              "idx" : i
             })
-          .bindPopup('<strong><a href="https://foursquare.com/v/' + venue.id +
-                     '">' + venue.name + '</a></strong>')
+          .bindPopup("<strong><a href='https://foursquare.com/v/" + venue.id +
+                     "'>" + venue.name + "</a></strong>")
             .addTo(myMapLayers);
         }
 
@@ -43,10 +43,10 @@ function drawMap(mapData, api){
       // a list item with it
       myMapLayers.eachLayer(function(layer) {
         // console.log(layer);
-        var listing = listings.appendChild(document.createElement('div'));
-        listing.className = 'item';
-        var link = listing.appendChild(document.createElement('a'));
-        link.href = '#';
+        var listing = listings.appendChild(document.createElement("div"));
+        listing.className = "item";
+        var link = listing.appendChild(document.createElement("a"));
+        link.href = "#";
         // link.className = 'title';
         link.innerHTML = mapData.response.venues[layer.options.idx].name;
 
@@ -68,6 +68,8 @@ function drawMap(mapData, api){
         foursquareObj.state = mapData.response.venues[layer.options.idx].location.state;
         foursquareObj.zip = mapData.response.venues[layer.options.idx].location.postalCode
         foursquareObj.dateID = $("#dateID").val();
+        foursquareObj.url = "https://foursquare.com/v/" + mapData.
+                             response.venues[layer.options.idx].id;
 
 
         var foursquareForm = formCreator(foursquareObj);
@@ -90,15 +92,15 @@ function drawMap(mapData, api){
           var latlng = L.latLng(event.latitude, event.longitude);
           var marker = L.marker(latlng, {
               icon: L.mapbox.marker.icon({
-                'marker-color': '#800000',
-                'marker-symbol': 'marker',
-                'marker-size': 'medium'
+                "marker-color": "#800000",
+                "marker-symbol": "marker",
+                "marker-size": "medium"
               }),
-              'title': event.title,
-              'idx' : i
+              "title": event.title,
+              "idx" : i
             })
-          .bindPopup('<strong><a href="' + event.url + '">' +
-            event.title + '</a></strong>')
+          .bindPopup("<strong><a href='" + event.url + "'>" +
+            event.title + "</a></strong>")
             .addTo(myMapLayers);
         }
 
@@ -106,10 +108,10 @@ function drawMap(mapData, api){
       // a list item with it
       myMapLayers.eachLayer(function(layer) {
         // console.log(layer);
-        var listing = listings.appendChild(document.createElement('div'));
-        listing.className = 'item';
-        var link = listing.appendChild(document.createElement('a'));
-        link.href = '#';
+        var listing = listings.appendChild(document.createElement("div"));
+        listing.className = "item";
+        var link = listing.appendChild(document.createElement("a"));
+        link.href = "#";
         // link.className = 'title';
         link.innerHTML = mapData.events.event[layer.options.idx].title;
 
@@ -123,6 +125,7 @@ function drawMap(mapData, api){
         eventfulObj.state = mapData.events.event[layer.options.idx].region_abbr;
         eventfulObj.zip = mapData.events.event[layer.options.idx].postal_code;
         eventfulObj.dateID = $("#dateID").val();
+        eventfulObj.url = mapData.events.event[layer.options.idx].url;
 
         var description = listing.appendChild(document.createElement("span"));
         description.innerHTML = mapData.events.event[layer.options.idx].description;
@@ -148,7 +151,7 @@ function drawMap(mapData, api){
     }
   }
 
-  $('#searchBtn1').on('click', function(e) {
+  $('#searchBtn1').on("click", function(e) {
       e.preventDefault();
 
       // If DOM element linked to map exits, 
@@ -161,14 +164,14 @@ function drawMap(mapData, api){
       $(".listings").html("");
 
       // AJAX call to backend for the data
-      var searchTerm = $('#restaurant').val();
-      $.getJSON('/dates/results?what=' + searchTerm, function(searchData) {
+      var searchTerm = $("#restaurant").val();
+      $.getJSON("/dates/results?what=" + searchTerm, function(searchData) {
           drawMap(searchData, "foursquare");
       });
   });
 
 
-  $('#searchBtn2').on('click', function(e) {
+  $('#searchBtn2').on("click", function(e) {
       e.preventDefault();
 
       // If DOM element linked to map exits, 
@@ -181,8 +184,8 @@ function drawMap(mapData, api){
       $(".listings").html("");
 
       // AJAX call to backend for the data
-      var searchTerm = $('#not-restaurant').val();
-      $.getJSON('/dates/eventsResults?keywords=' + searchTerm, function(searchData) {
+      var searchTerm = $("#not-restaurant").val();
+      $.getJSON("/dates/eventsResults?keywords=" + searchTerm, function(searchData) {
           drawMap(searchData, "eventful");
       });
   });
