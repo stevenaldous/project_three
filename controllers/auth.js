@@ -48,7 +48,7 @@ router.get('/callback/:provider',function(req,res){
       req.login(user,function(err){
         if(err) throw err;
         // req.flash('success','You are now logged in.');
-        res.redirect('/auth/profile');
+        res.redirect('/dates');
       });
     }else{
       req.flash('danger',info.message || 'Unknown error.');
@@ -61,11 +61,6 @@ router.get('/callback/:provider',function(req,res){
 router.get('/signup',function(req,res){
     res.render('auth/signup');
 });
-//loads profile page
-router.get('/profile', function(req, res) {
-    res.render('auth/profile', {currentUser:req.user});
-});
-
 //POST /auth/signup
 //create new user in database
 router.post('/signup',function(req,res){
