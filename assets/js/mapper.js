@@ -170,6 +170,10 @@ function drawMap(mapData, api){
       });
   });
 
+  $(".date-add").on("click", afad, function(e){
+    e.preventDefault;
+  })
+
 }); // end doc.ready function
 
 var formCreator = function(method, action, values){
@@ -186,7 +190,9 @@ var formCreator = function(method, action, values){
 
   var button = form.appendChild(document.createElement("button"))
   button.setAttribute("type", "submit");
+  button.setAttribute("class", "date-add");
   button.innerHTML = "Add to Date";
+
 
   return form;
 };
