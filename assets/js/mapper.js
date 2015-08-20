@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+  $("#show-events").popover();
+
+
+
 function drawMap(mapData, api){
   // Builds the map container
       $(".map-container").append("<div class='jumbotron' id='map'></div>");
@@ -158,9 +162,9 @@ function drawMap(mapData, api){
                // of the page
                return false;
             };
-        });
+      });
     }
-  }
+  } // end drawMap function
 
   $('#searchBtn1').on("click", function(e) {
       e.preventDefault();
@@ -230,13 +234,38 @@ function drawMap(mapData, api){
   $(".listings").on("submit", "form", function(e){
     e.preventDefault();
     $.ajax({
-      type: "POST",
+      method: "post",
       url: "/dates/" + $("#dateID").val() + "/search" ,
       data: $(this).serialize(),
       success: function(response){
         console.log(response);
       }
+    }).done(function(){
+      $.getJSON("/dates/" + $("#dateID").val() + "/eventlist", function(venues){
+        var myEvents = "";
+        venues.forEach(function(venue){
+          myEvents += venue.name;
+          myEvents += "<br>";
+        });
+
+        $("#show-events").attr("data-content", myEvents);
+
+        $("#show-events").html("Events in Date(" + venues.length + ")");
+
+      });
+
     });
+        // $.ajax({
+        //   method: "get",
+        //   url: "/dates/" + $("#dateID").val() + "/eventlist",
+        //   success: function(response){
+        //     // $("").html("date events(" + response + ")");
+        //     $("#show-events").attr("data-content", function(){
+    
+        //     });
+
+        //   }
+        // });
   });
 
 
@@ -255,9 +284,10 @@ var formCreator = function(values){
 
   var button = form.appendChild(document.createElement("button"))
   button.setAttribute("type", "submit");
-  button.setAttribute("class","btn btn-primary");
+  button.setAttribute("class","btn btn-primary addToDateBtn");
   button.setAttribute("id","add-to-date");
-  button.innerHTML = "+";
+  button.innerHTML = "+ Add to Date";
+
 
 
   return form;

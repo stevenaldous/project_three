@@ -79,15 +79,26 @@ router.post('/', function(req, res){
 // get /dates/:id/search
 router.get('/:id/search', function(req, res){
   res.render('dates/search', {dateID: req.params.id});
-})
+});
+
+
+// get /dates/:id/eventlist (for the date "cart")
+router.get('/:id/eventlist', function(req, res){
+  db.date.find({where: {id: req.params.id}, include: [db.venue]}).then(function(date){
+    // var listLength = date.venues.length;
+    // var listLength = listLength.toString();
+    res.json(date.venues);
+  });
+});
+
+
 //get /dates/:id -- show user dates specifics
 router.get('/:id', function(req, res){
   db.date.findAll({where: {id: req.params.id}, include: [db.venue]}).then(function(date){
     // res.send(date);
     res.render('dates/show', {myDate: date});
-  })
-
-})
+  });
+});
 
 //delete dates from user dates
 router.delete('/:id', function(req, res){
