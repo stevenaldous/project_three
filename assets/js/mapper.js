@@ -250,6 +250,8 @@ function drawMap(mapData, api){
 
         $("#show-events").attr("data-content", myEvents);
 
+        $("#show-events").html("Events in Date(" + venues.length + ")");
+
       });
 
     });
