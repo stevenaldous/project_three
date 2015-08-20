@@ -250,7 +250,7 @@ var formCreator = function(values){
 
   var button = form.appendChild(document.createElement("button"))
   button.setAttribute("type", "submit");
-  button.setAttribute("class","btn btn-primary");
+  button.setAttribute("class","btn btn-primary addToDateBtn");
   button.innerHTML = "+ Add to Date";
 
 
@@ -258,4 +258,4 @@ var formCreator = function(values){
 };
 
 
-        
+

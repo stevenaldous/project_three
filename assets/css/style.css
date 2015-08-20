@@ -38,3 +38,16 @@ input#not-restaurant.form-control {
   min-height: 500px;
   /*width: 85%;*/
 }
+
+.addToDateBtn {
+  margin-bottom: 15px;
+}
+
+.img-center {
+  margin: 0 auto;
+  border: 2px solid white;
+}
+
+.socialLinks p {
+  display: block;
+}
