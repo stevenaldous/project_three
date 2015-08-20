@@ -49,9 +49,11 @@ function drawMap(mapData, api){
         link.href = "#";
         // link.className = 'title';
         link.innerHTML = mapData.response.venues[layer.options.idx].name;
+        listing.appendChild(document.createElement("br"));
 
         var description = listing.appendChild(document.createElement("span"));
         description.innerHTML = mapData.response.venues[layer.options.idx].categories[0].name;
+        listing.appendChild(document.createElement("br"));
 
         var foursquareLink = listing.appendChild(document.createElement("a"));
         foursquareLink.href="https://foursquare.com/v/" + mapData.
@@ -115,6 +117,7 @@ function drawMap(mapData, api){
         link.href = "#";
         // link.className = 'title';
         link.innerHTML = mapData.events.event[layer.options.idx].title;
+        listing.appendChild(document.createElement("br"));
 
         var eventfulObj = {};
         eventfulObj.name = mapData.events.event[layer.options.idx].title;
@@ -134,6 +137,8 @@ function drawMap(mapData, api){
         var description = description_container.appendChild(document
                                                             .createElement("span"));
         description.innerHTML = mapData.events.event[layer.options.idx].description;
+        listing.appendChild(document.createElement("br"));
+
 
 
         var eventfulLink = listing.appendChild(document.createElement("a"));
