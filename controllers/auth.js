@@ -48,7 +48,7 @@ router.get('/callback/:provider',function(req,res){
       req.login(user,function(err){
         if(err) throw err;
         // req.flash('success','You are now logged in.');
-        res.redirect('/dates/');
+        res.redirect('/dates');
 
       });
     }else{
@@ -81,7 +81,7 @@ router.post('/signup',function(req,res){
         if(created){
           //user is signed up forward them to the home page
           req.flash('success','Thank your for joining cheapdate!')
-          res.redirect('/auth/login');
+          res.redirect('/dates');
         } else {
           req.flash("danger","A user with that e-mail address already exists.");
           res.redirect('/auth/signup');

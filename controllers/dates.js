@@ -5,9 +5,7 @@ var db = require('../models');
 
 //get /dates dates home page
 router.get('/', function(req, res){
-   var userId = 4;
-  // var userId = currentUser.id
-  db.date.findAll({where: {userId: currentUser.id},
+  db.date.findAll({where: {userId: req.user.id},
     order: [['createdAt','DESC']]}).then(function(dates){
     res.render('dates/index', {myDates: dates});
   });
@@ -45,7 +43,6 @@ router.get('/eventsResults', function(req,res) {
     request(url, function(error, response, data) {
             res.send(data);
     });
-
 })
 
 router.post("/:id/search", function(req,res){
