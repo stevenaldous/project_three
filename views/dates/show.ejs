@@ -1,11 +1,16 @@
 <% myDate.forEach(function(date){ %>
 <h1><%= date.title %></h1>
-<div class="well">
-  <% date.venues.forEach(function(venue){ %>
-    <h3><%= venue.name %></h3>
-    <h5><%= venue.address %></h5>
-    <h5><%= venue.city %>, <%= venue.state %></h5>
-    <h5><%- link_to ('more info',venue.url )  %></h5>
-  <% }); %>
+<div class="row">
+  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+    <div class="well">
+      <% date.venues.forEach(function(venue){ %>
+        <h3><%= venue.name %></h3>
+        <h5><%= venue.address %></h5>
+        <h5><%= venue.city %>, <%= venue.state %></h5>
+        <h5><%- link_to ('more info',venue.url )  %></h5>
+      <% }); %>
+      <a href="/dates" id="add-to-date" type="button" class='btn btn-default'>back</a>
+    </div>
+    <% }); %>
+  </div>
 </div>
-<% }); %>

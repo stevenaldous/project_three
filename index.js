@@ -133,6 +133,9 @@ app.get('/about', function(req, res){
   res.render('main/about');
 });
 
+app.get('/contact', function(req, res){
+  res.render('main/contact')
+})
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("You're lisening to the smooth sounds of Port 3000")

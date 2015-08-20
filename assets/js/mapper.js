@@ -256,11 +256,12 @@ var formCreator = function(values){
   var button = form.appendChild(document.createElement("button"))
   button.setAttribute("type", "submit");
   button.setAttribute("class","btn btn-primary");
-  button.innerHTML = "+ Add to Date";
+  button.setAttribute("id","add-to-date");
+  button.innerHTML = "+";
 
 
   return form;
 };
 
 
-        
+
