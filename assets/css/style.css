@@ -16,3 +16,9 @@ body{
   background: none;
   border: none;
 }
+.dropdown-toggle{
+  margin-top: 10px;
+  border: none;
+  background: none;
+
+}
