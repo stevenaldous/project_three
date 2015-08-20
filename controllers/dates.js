@@ -88,9 +88,9 @@ router.get('/:id/search', function(req, res){
 // get /dates/:id/eventlist (for the date "cart")
 router.get('/:id/eventlist', function(req, res){
   db.date.find({where: {id: req.params.id}, include: [db.venue]}).then(function(date){
-    var listLength = date.venues.length;
-    var listLength = listLength.toString();
-    res.send(listLength);
+    // var listLength = date.venues.length;
+    // var listLength = listLength.toString();
+    res.json(date.venues);
   });
 });
 

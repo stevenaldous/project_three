@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+  $("#show-events").popover();
+
+
+
 function drawMap(mapData, api){
   // Builds the map container
       $(".map-container").append("<div class='jumbotron' id='map'></div>");
@@ -232,14 +236,29 @@ function drawMap(mapData, api){
         console.log(response);
       }
     }).done(function(){
-        $.ajax({
-          method: "get",
-          url: "/dates/" + $("#dateID").val() + "/eventlist",
-          success: function(response){
-            $("#venue-count").html("(" + response + ")");
-          }
+      $.getJSON("/dates/" + $("#dateID").val() + "/eventlist", function(venues){
+        var myEvents = "";
+        venues.forEach(function(venue){
+          myEvents += venue.name;
+          myEvents += "<br>";
         });
+
+        $("#show-events").attr("data-content", myEvents);
+
+      });
+
     });
+        // $.ajax({
+        //   method: "get",
+        //   url: "/dates/" + $("#dateID").val() + "/eventlist",
+        //   success: function(response){
+        //     // $("").html("date events(" + response + ")");
+        //     $("#show-events").attr("data-content", function(){
+    
+        //     });
+
+        //   }
+        // });
   });
 
 
