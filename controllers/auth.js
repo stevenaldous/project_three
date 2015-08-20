@@ -48,7 +48,7 @@ router.get('/callback/:provider',function(req,res){
       req.login(user,function(err){
         if(err) throw err;
         // req.flash('success','You are now logged in.');
-        res.redirect('/auth/profile');
+        res.redirect('/dates/');
       });
     }else{
       req.flash('danger',info.message || 'Unknown error.');
