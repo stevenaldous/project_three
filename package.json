@@ -1,7 +1,7 @@
 {
   "name": "project_three",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fernando Gomez, Sloan Coffin, Brandon Webster, Steve Aldous\r\r###Github repo: \t https://github.com/branweb1/project_three \r\r###Trello Board:  https://trello.com/b/YLdQ34VD/project-3\r\r###Goal: Our goal is to create an application that helps users plan their dates. Based on interests, budget, and location our app will help plan a date to fit. \r\r###Functionality goals: * allow a user to login with OAuth – \r\t* https://www.npmjs.com/package/node-oauth\r* allow a user to select their interests from a list of options\r* allow a user to location and area and radius\r* allow the user to save an agenda of activities and display on a map.\r\r###Secondary goals:\r* allow user to save preferences for future date planning\r* allow user to read event details/reviews without being taken out of the app.\r* user profile – basic info and profile image options \r\t* \thttp://cloudinary.com/\r\r###Design goals\r* clean, uncluttered presentation\r* mobile responsive\r\r###Front end frameworks:\r* bootstrap – heavy lifting of front end\r\t* http://getbootstrap.com/\r* parallax home page – describe and show features of site without AUTH\r* http://materializecss.com/parallax.html\r* API needed\r* Foursquare\r\t* https://developer.foursquare.com/\r* eventBrite\r\t* http://developer.eventbrite.com/\r* yelp\r\t* https://www.yelp.com/developers/documentation/v2/overview\r* map\r\t* https://www.mapbox.com/",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,5 +35,6 @@
     "pg-hstore": "^2.3.2",
     "request": "^2.60.0",
     "sequelize": "^3.5.1"
-  }
+  },
+  "devDependencies": {}
 }

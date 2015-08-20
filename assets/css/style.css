@@ -2,7 +2,7 @@ body{
   background-color: #C8B288;
 }
 #site-container{
-  margin-top: 50px;
+  margin-top: 60px;
 }
 #map{
 	height: 500px;
@@ -20,5 +20,21 @@ body{
   margin-top: 10px;
   border: none;
   background: none;
+}
 
+input#restaurant.form-control,
+input#not-restaurant.form-control {
+  width: 85%;
+  display: inline-block;
+}
+
+.title {
+  font-size: 17px;
+}
+
+.results {
+  overflow: auto;
+  max-height: 500px;
+  min-height: 500px;
+  /*width: 85%;*/
 }

@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 function drawMap(mapData, api){
   // Builds the map container
-      $(".container").append("<div class='jumbotron' id='map'></div>");
+      $(".map-container").append("<div class='jumbotron' id='map'></div>");
 
       L.mapbox.accessToken = "pk.eyJ1IjoiZ3JvdXB0d28iLCJhIjoiOTYyMjYwM2ExYjU0" +
                              "MTNlNzMwMmYxZDhmNTNlMzBiZDIifQ.uILo4IfMpqra-O-NpKkbqw";
@@ -35,7 +35,7 @@ function drawMap(mapData, api){
               "idx" : i
             })
           .bindPopup("<strong><a href='https://foursquare.com/v/" + venue.id +
-                     "'>" + venue.name + "</a></strong>")
+                     "' target='blank'>" + venue.name + "</a></strong>")
             .addTo(myMapLayers);
         }
 
@@ -100,7 +100,7 @@ function drawMap(mapData, api){
               "title": event.title,
               "idx" : i
             })
-          .bindPopup("<strong><a href='" + event.url + "'>" +
+          .bindPopup("<strong><a href='" + event.url + "' target='blank'>" +
             event.title + "</a></strong>")
             .addTo(myMapLayers);
         }
@@ -250,7 +250,8 @@ var formCreator = function(values){
 
   var button = form.appendChild(document.createElement("button"))
   button.setAttribute("type", "submit");
-  button.innerHTML = "Add to Date";
+  button.setAttribute("class","btn btn-primary");
+  button.innerHTML = "+ Add to Date";
 
 
   return form;

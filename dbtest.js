@@ -8,13 +8,13 @@ app.use(bodyParser.urlencoded({extended:true}));
 var userId = 1;
 ////////////////////////////////////////////////////////////
 //user creation flow - works
-// db.user.create({
-//   name: 'test',
-//   email: 'test@gmail.com',
-//   password: 'test'
-// }).then(function(user){
-//   console.log(user.get());
-// });
+db.user.create({
+  name: 'test',
+  email: 'test@gmail.com',
+  password: 'password'
+}).then(function(user){
+  console.log(user.get());
+});
 ////////////////////////////////////////////////////////////
 //access user - works
 // db.user.find({where: {id: userId}}).then(function(user){
@@ -68,22 +68,22 @@ var venue = {
 //     })
 // })
 // by venue.id
-db.date.find({where: {id: dateId}}).then(function(date){
-  db.venue.findOrCreate({include: [db.date], where: {apiId: venue.id}, defaults: {
-    name: venue.name,
-    url: venue.url,
-    lat: venue.location.lat,
-    lng: venue.location.lng,
-    address: venue.location.address,
-    city: venue.location.city,
-    state: venue.location.state,
-    zip: venue.location.postalCode
-  }}).spread(function(venue, created){
-    date.addVenue(venue).then(function(){
-    console.log(venue.get());
-    })
-  })
-})
+// db.date.find({where: {id: dateId}}).then(function(date){
+//   db.venue.findOrCreate({include: [db.date], where: {apiId: venue.id}, defaults: {
+//     name: venue.name,
+//     url: venue.url,
+//     lat: venue.location.lat,
+//     lng: venue.location.lng,
+//     address: venue.location.address,
+//     city: venue.location.city,
+//     state: venue.location.state,
+//     zip: venue.location.postalCode
+//   }}).spread(function(venue, created){
+//     date.addVenue(venue).then(function(){
+//     console.log(venue.get());
+//     })
+//   })
+// })
 
 
 
