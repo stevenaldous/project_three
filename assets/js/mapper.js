@@ -127,8 +127,13 @@ function drawMap(mapData, api){
         eventfulObj.dateID = $("#dateID").val();
         eventfulObj.url = mapData.events.event[layer.options.idx].url;
 
-        var description = listing.appendChild(document.createElement("span"));
+        var description_container = listing.appendChild(document
+                                                        .createElement("div"));
+        description_container.setAttribute("class", "truncated_text");
+        var description = description_container.appendChild(document
+                                                            .createElement("span"));
         description.innerHTML = mapData.events.event[layer.options.idx].description;
+
 
         var eventfulLink = listing.appendChild(document.createElement("a"));
         eventfulLink.href= mapData.events.event[layer.options.idx].url;
@@ -187,7 +192,33 @@ function drawMap(mapData, api){
       var searchTerm = $("#not-restaurant").val();
       $.getJSON("/dates/eventsResults?keywords=" + searchTerm, function(searchData) {
           drawMap(searchData, "eventful");
+          var maxHeight = 75;
+          var showText = "more";
+          var hideText = "less";
+
+          $(".truncated_text").each(function(){
+            var text = $(this);
+            if (text.height() > maxHeight){
+              text.css({"overflow": "hidden", "height": maxHeight + "px"});
+              var moreLink = $("<a href='#'>" + showText + "</a>");
+              var moreLinkDiv = $("<div></div>");
+              moreLinkDiv.append(moreLink);
+              $(this).after(moreLinkDiv);
+
+              moreLink.on("click", function(e){
+                e.preventDefault();
+                if (text.height() > maxHeight) {
+                  $(this).html(showText);
+                  text.css("height", maxHeight + "px");
+                } else {
+                  $(this).html(hideText);
+                  text.css("height", "auto");
+                }
+              });
+            }
+          });
       });
+
   });
 
   $(".listings").on("submit", "form", function(e){
@@ -201,6 +232,8 @@ function drawMap(mapData, api){
       }
     });
   });
+
+
 
 }); // end doc.ready function
 
@@ -222,3 +255,5 @@ var formCreator = function(values){
   return form;
 };
 
+
+        
