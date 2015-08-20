@@ -11,3 +11,14 @@ body{
 .jumbotron{
   background-color: #C8B288;
 }
+.glyphicon-remove{
+  margin-top: 15px;
+  background: none;
+  border: none;
+}
+.dropdown-toggle{
+  margin-top: 10px;
+  border: none;
+  background: none;
+
+}
