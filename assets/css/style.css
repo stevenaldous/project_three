@@ -1,5 +1,5 @@
 body{
-  background-color: #C8B288;
+  /*background-color: #C8B288;*/
 }
 
 /*Big video wrap holds background video*/
@@ -19,4 +19,13 @@ body{
 }
 .jumbotron{
   background-color: #C8B288;
+}
+
+#element-to-animate {
+  height: 200px;
+}
+
+#element-to-animate > h1 {
+  font-size: 62px;
+  text-align: center;
 }
