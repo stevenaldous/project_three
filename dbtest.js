@@ -5,16 +5,16 @@ var db = require('./models')
 app.use(bodyParser.urlencoded({extended:true}));
 
 // console.log('test');
-var userId = 1;
+// var userId = 1;
 ////////////////////////////////////////////////////////////
 //user creation flow - works
-db.user.create({
-  name: 'test',
-  email: 'test@gmail.com',
-  password: 'password'
-}).then(function(user){
-  console.log(user.get());
-});
+// db.user.create({
+//   name: 'test',
+//   email: 'test@gmail.com',
+//   password: 'password'
+// }).then(function(user){
+//   console.log(user.get());
+// });
 ////////////////////////////////////////////////////////////
 //access user - works
 // db.user.find({where: {id: userId}}).then(function(user){
@@ -34,20 +34,20 @@ db.user.create({
 // });
 ////////////////////////////////////////////////////////////
 //venue creation through datesVenues - working, need to adjust model for lat,lng
-var dateId = 1;
-var venue = {
-  id: "55c6e371498eb8845e94c84b",
-  name: 'test venue 1',
-  location: {
-    address: '1650 E Olive Way',
-    lat: 47.61975114261211,
-    lng: -122.32393626490352,
-    postalCode:'98102',
-    city: 'Seattle',
-    state: 'WA',
-  },
-  url: 'http://theoatmeal.com/'
-};
+// var dateId = 1;
+// var venue = {
+//   id: "55c6e371498eb8845e94c84b",
+//   name: 'test venue 1',
+//   location: {
+//     address: '1650 E Olive Way',
+//     lat: 47.61975114261211,
+//     lng: -122.32393626490352,
+//     postalCode:'98102',
+//     city: 'Seattle',
+//     state: 'WA',
+//   },
+//   url: 'http://theoatmeal.com/'
+// };
 // // console.log(venue);
 // // by title
 // db.date.find({where: {id: dateId}}).then(function(date){
@@ -87,7 +87,9 @@ var venue = {
 
 
 
-
+// db.date.find({where: {id: 10}, include: [db.venue]}).then(function(date){
+//   console.log(date.venues.length);
+// })
 
 
 

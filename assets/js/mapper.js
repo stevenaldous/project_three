@@ -153,9 +153,9 @@ function drawMap(mapData, api){
                // of the page
                return false;
             };
-        });
+      });
     }
-  }
+  } // end drawMap function
 
   $('#searchBtn1').on("click", function(e) {
       e.preventDefault();
@@ -225,12 +225,20 @@ function drawMap(mapData, api){
   $(".listings").on("submit", "form", function(e){
     e.preventDefault();
     $.ajax({
-      type: "POST",
+      method: "post",
       url: "/dates/" + $("#dateID").val() + "/search" ,
       data: $(this).serialize(),
       success: function(response){
         console.log(response);
       }
+    }).done(function(){
+        $.ajax({
+          method: "get",
+          url: "/dates/" + $("#dateID").val() + "/eventlist",
+          success: function(response){
+            $("#venue-count").html("(" + response + ")");
+          }
+        });
     });
   });
 
