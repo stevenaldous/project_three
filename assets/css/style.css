@@ -78,8 +78,11 @@ input#not-restaurant.form-control {
   border: none;
   background-color: rgba(0,0,0, .7);
   color: #FFFFFF;
-
 }
+#submit-button:hover{
+  background-color: rgba(0,0,0, .8);
+}
+
 .dropdown-toggle{
   min-height: 100%;
 }
