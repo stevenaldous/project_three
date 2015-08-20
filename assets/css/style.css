@@ -115,4 +115,16 @@ a{
 .searchBtn{
   background-color: rgba(0, 0, 0, .6);
   border: none;
+
+.addToDateBtn {
+  margin-bottom: 15px;
+}
+
+.img-center {
+  margin: 0 auto;
+  border: 2px solid white;
+}
+
+.socialLinks p {
+  display: block;
 }

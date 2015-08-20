@@ -114,7 +114,7 @@ passport.use(new LocalStrategy({
 // END OAUTH
 
 app.use(function(req,res,next){
-  req.session.user = 1; //FOR TESTING ONLY
+  // req.session.user = 1; //FOR TESTING ONLY
   res.locals.currentUser = req.user;
   res.locals.alerts = req.flash();
   next();
