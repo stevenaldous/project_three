@@ -1,8 +1,17 @@
 body{
-  background-color: #C8B288;
+  /*background-color: #C8B288;*/
+}
+
+/*Big video wrap holds background video*/
+/*It must be set to fixed for the bs3 top level wraper to display on top*/
+/*It also needs a z-index below that of other elements*/
+#big-video-wrap {
+  z-index: -5;
+  position: fixed;
 }
 #site-container{
-  margin-top: 60px;
+  margin-top: 50px;
+  z-index: 20;
 }
 #map{
 	height: 500px;
@@ -37,4 +46,12 @@ input#not-restaurant.form-control {
   max-height: 500px;
   min-height: 500px;
   /*width: 85%;*/
+
+#element-to-animate {
+  height: 200px;
+}
+
+#element-to-animate > h1 {
+  font-size: 62px;
+  text-align: center;
 }
