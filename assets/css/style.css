@@ -1,5 +1,16 @@
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('Montserrat-Regular.eot');
+  src: url('Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+       url('Montserrat-Regular.woff') format('woff'),
+       url('Montserrat-Regular.ttf') format('truetype'),
+       url('Montserrat-Regular.svg#Montserrat-Regular') format('svg');
+}
 body{
-  background-color: #C8B288;
+  /*background-color: #C8B288;*/
+  font-family: 'Montserrat-Regular',sans-serif;
+  background-image: url('/images/cardboard.png');
+
 }
 #site-container{
   margin-top: 60px;
@@ -8,33 +19,81 @@ body{
 	height: 500px;
 	width: 500px;
 }
+.navbar{
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+}
+#brand{
+  color: #FFFFFF;
+}
+#brand:hover{
+  background-color: rgb(0,0,0);
+}
 .jumbotron{
-  background-color: #C8B288;
+  background: none;
 }
 .glyphicon-remove{
-  margin-top: 15px;
+  margin-top: 10px;
   background: none;
   border: none;
+}
+.glyphicon-remove:hover{
+  background: none;
+}#input-field{
+  border: none;
+  border-radius: 0px;
+}
+.date-link{
+  color: rgb(0,0,0);
 }
 .dropdown-toggle{
   margin-top: 10px;
   border: none;
   background: none;
 }
-
+.well{
+  background-color: rgba(0, 0, 0, .3);
+  /*background: none;*/
+  border-radius: 0px;
+  border: none;
+}
 input#restaurant.form-control,
 input#not-restaurant.form-control {
   width: 85%;
   display: inline-block;
 }
-
 .title {
   font-size: 17px;
 }
+#submit-button{
+  border: none;
+  background-color: rgba(0,0,0, .7);
+  color: #FFFFFF;
 
+}
+.dropdown-toggle{
+  min-height: 100%;
+}
+#results-header{
+  background-color: rgba(0,0,0, .3);
+  color: #FFFFFF;
+}
 .results {
   overflow: auto;
   max-height: 500px;
   min-height: 500px;
+  background-color: rgba(0, 0, 0, .3);
   /*width: 85%;*/
+}
+#add-to-date{
+  background-color: rgba(0, 0, 0, .3);
+  border: none;
+  color: #FFFFFF;
+}
+a{
+  color: #FFFFFF;
+}
+.searchBtn{
+  background-color: rgba(0, 0, 0, .6);
+  border: none;
 }

@@ -1,17 +1,18 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a id="brand" class="navbar-brand" href="/">cheap_date</a>
+      <a id="brand" class="navbar-brand" href="/">HEYWANNA</a>
     </div>
     <div class="navbar-right">
 
         <% if(currentUser !== undefined) { %>
-        <a id="brand" class="navbar-brand" href="/dates">dates</a>
+        <a id="brand" class="navbar-brand" href="/dates">DATES</a>
           <div class="btn-group">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.name %><span class="caret"></span>
+          <button id="brand" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= currentUser.name %><span class="caret"></span>
           </button>
             <ul class="dropdown-menu">
               <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact Us</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="/auth/logout">logout</a></li>
             </ul>
