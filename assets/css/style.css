@@ -77,6 +77,11 @@ input#not-restaurant.form-control {
   background-color: rgba(0,0,0, .7);
   color: #FFFFFF;
 }
+#show-events{
+  border: none;
+  background-color: rgba(0,0,0, .7);
+  color: #FFFFFF;
+}
 #submit-button:hover{
   background-color: rgba(0,0,0, .8);
 }
