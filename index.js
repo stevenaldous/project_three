@@ -57,6 +57,7 @@ passport.use(new FacebookStrategy({
     if(provider && provider.user){
       //login
       provider.token = accessToken;
+      currentUser = user;
       provider.save().then(function(){
         done(null,provider.user.get());
       });
@@ -77,7 +78,6 @@ passport.use(new FacebookStrategy({
             done(null,user.get());
           })
         }else{
-          currentUser = user;
           //signup failed
           done(null,false,{message:'You already signed up with this e-mail address. Please login.'})
         }
