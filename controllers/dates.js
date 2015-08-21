@@ -66,7 +66,7 @@ router.post("/:id/search", function(req,res){
 
 //post create new date
 router.post('/', function(req, res){
-  var userId = currentUser.id;
+  var userId = req.user.id;
   db.user.find({where: {id: userId}}).then(function(user){
    db.date.findOrCreate({ where: {title: req.body.name},
     defaults: {userId: user.id}

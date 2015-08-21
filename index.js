@@ -93,7 +93,7 @@ passport.use(new LocalStrategy({
     db.user.find({where:{email:email}}).then(function(user){
       if(user){
         //found the user
-        currentUser = user;
+        // currentUser = user;
         user.checkPassword(password,function(err,result){
           if(err) return done(err);
           if(result){
