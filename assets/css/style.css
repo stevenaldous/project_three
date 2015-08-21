@@ -129,6 +129,10 @@ a {
   border: 2px solid white;
 }
 
+.imgDiv {
+  background: url('images/topBorder.png') repeat-x;
+}
+
 .socialLinks p {
   display: block;
 }
@@ -140,4 +144,121 @@ a {
 
 .reveal-text {
   color: #000080;
+}
+
+/* ABOUT PAGE*/
+
+.projectBox {
+  margin-top: 50px;
+  color: white;
+}
+
+.profilesBox {
+  float: left;
+  min-width: 960px;
+  height: 600px;
+  margin: 0px;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  display: block;
+  color: black;
+  line-height: 1.5;
+  margin-bottom: 50px;
+}
+
+.scroller {
+  position: absolute;
+  top:0px;
+  max-height: 900px;
+  background-image: url('images/verticalBorder.png');
+  background-color: rgba(0,0,0,0.6);
+  background-repeat-y: background-repeat-y;
+  background-origin: initial;
+}
+
+.profile {
+  float:left;
+  width: 240px;
+  text-align: center;
+  color: white;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+.brandon {
+  width: 240px;
+  text-align: center;
+  color: black;
+}
+
+a.teamMember {
+  background-image: url('images/rightBorder.png');
+  display: inline-block;
+  background-color: rgba(242,245,247, 0.8);
+  background-origin: initial;
+  background-clip: initial;
+  background-attachment: initial;
+  background-repeat-x: no-repeat;
+  background-repeat-y: repeat;
+  background-position-x: 0px;
+  background-position-y: 4px;
+  background-size: initial;
+  width: 240px;
+}
+
+a.teamMember img {
+  border: none;
+  margin: 28px 0 23px 0;
+  width: 150px;
+  height: 150px;
+}
+
+.teamTitle h2 a {
+  text-decoration: none;
+  color: #EE4023;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 60%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+.teamTitle h2 {
+  margin-top: 0;
+}
+
+/*.teamTitle p {
+  padding: 15px;
+}*/
+
+.profileText {
+  width: 240px;
+  height: 362px;
+  padding: 0 20px 0 20px;
+  background: url('images/topBorder.png') repeat-x;
+}
+
+.team {
+  color: white;
+}
+
+h5 {
+  border-top: #CFD4D7 1px solid;
+  border-bottom: #CFD4D7 1px solid;
+  width: 200px;
+  padding: 8px;
+  font-size: 80%;
 }
