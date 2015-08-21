@@ -57,7 +57,6 @@ passport.use(new FacebookStrategy({
     if(provider && provider.user){
       //login
       provider.token = accessToken;
-      currentUser = user;
       provider.save().then(function(){
         done(null,provider.user.get());
       });
