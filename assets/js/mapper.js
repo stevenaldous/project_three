@@ -182,9 +182,9 @@ function drawMap(mapData, api){
       var searchTerm = $("#restaurant").val();
       if (searchTerm){
         $.getJSON("/dates/results?what=" + searchTerm, function(searchData) {
-            if (searchData.length > 0) {
+            // if (searchData.length > 0) {
               drawMap(searchData, "foursquare");
-            }
+            // }
         });
       } else {
         console.log("no term")
@@ -208,9 +208,9 @@ function drawMap(mapData, api){
       var searchTerm = $("#not-restaurant").val();
       if (searchTerm){
         $.getJSON("/dates/eventsResults?keywords=" + searchTerm, function(searchData) {
-            if (searchData.length > 0) {
+            var responseLength = parseInt(searchData.total_items);
+            if ( responseLength > 0) {
               drawMap(searchData, "eventful");
-
 
               var maxHeight = 75;
               var showText = "more";
@@ -234,7 +234,7 @@ function drawMap(mapData, api){
                       $(this).html(hideText);
                       text.css("height", "auto");
                     }
-                  });
+                  }); //
                 }
               });
             }
@@ -269,17 +269,6 @@ function drawMap(mapData, api){
       });
 
     });
-        // $.ajax({
-        //   method: "get",
-        //   url: "/dates/" + $("#dateID").val() + "/eventlist",
-        //   success: function(response){
-        //     // $("").html("date events(" + response + ")");
-        //     $("#show-events").attr("data-content", function(){
-    
-        //     });
-
-        //   }
-        // });
   });
 
 
