@@ -81,7 +81,7 @@ router.post('/signup',function(req,res){
         if(created){
           //user is signed up forward them to the home page
           req.flash('success','Thank your for joining cheapdate!')
-          res.redirect('/dates');
+          res.redirect('/auth/login');
         } else {
           req.flash("danger","A user with that e-mail address already exists.");
           res.redirect('/auth/signup');
