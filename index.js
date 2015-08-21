@@ -77,6 +77,7 @@ passport.use(new FacebookStrategy({
             done(null,user.get());
           })
         }else{
+          currentUser = user;
           //signup failed
           done(null,false,{message:'You already signed up with this e-mail address. Please login.'})
         }
