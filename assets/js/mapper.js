@@ -258,13 +258,14 @@ function drawMap(mapData, api){
       }
     }).done(function(){
       $.getJSON("/dates/" + $("#dateID").val() + "/eventlist", function(venues){
-        var myEvents = "";
+        var myEvents = "<ul>";
         venues.forEach(function(venue){
+          myEvents += "<li>"
           myEvents += venue.name;
-          myEvents += "<br>";
+          myEvents += "</li>";
         });
 
-        $("#show-events").attr("data-content", myEvents);
+        $("#show-events").attr("data-content", myEvents + "</ul>");
 
         $("#show-events").html("Events in Date(" + venues.length + ")");
 
