@@ -51,7 +51,7 @@ function drawMap(mapData, api){
         listing.className = "item";
         var link = listing.appendChild(document.createElement("a"));
         link.href = "#";
-        // link.className = 'title';
+        link.className = "title";
         link.innerHTML = mapData.response.venues[layer.options.idx].name;
         listing.appendChild(document.createElement("br"));
 
@@ -62,7 +62,9 @@ function drawMap(mapData, api){
         var foursquareLink = listing.appendChild(document.createElement("a"));
         foursquareLink.href="https://foursquare.com/v/" + mapData.
                              response.venues[layer.options.idx].id;
-        foursquareLink.innerHTML = "View on Foursquare"
+        foursquareLink.setAttribute("class", "foursquare-link");
+        foursquareLink.setAttribute("target", "_blank");
+        foursquareLink.innerHTML = "View on Foursquare";
 
         var foursquareObj = {};
         foursquareObj.name = mapData.response.venues[layer.options.idx].name;
@@ -106,7 +108,7 @@ function drawMap(mapData, api){
               "title": event.title,
               "idx" : i
             })
-          .bindPopup("<strong><a href='" + event.url + "' target='blank'>" +
+          .bindPopup("<strong><a href='" + event.url + "' target='_blank'>" +
             event.title + "</a></strong>")
             .addTo(myMapLayers);
         }
@@ -114,7 +116,6 @@ function drawMap(mapData, api){
       // loop through layers, grabing info from each layer and building
       // a list item with it
       myMapLayers.eachLayer(function(layer) {
-        // console.log(layer);
         var listing = listings.appendChild(document.createElement("div"));
         listing.className = "item";
         var link = listing.appendChild(document.createElement("a"));
@@ -147,6 +148,7 @@ function drawMap(mapData, api){
 
         var eventfulLink = listing.appendChild(document.createElement("a"));
         eventfulLink.href= mapData.events.event[layer.options.idx].url;
+        eventfulLink.setAttribute("target", "_blank");
         eventfulLink.innerHTML = "View on Eventful";
 
 
