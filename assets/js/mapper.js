@@ -180,9 +180,15 @@ function drawMap(mapData, api){
 
       // AJAX call to backend for the data
       var searchTerm = $("#restaurant").val();
-      $.getJSON("/dates/results?what=" + searchTerm, function(searchData) {
-          drawMap(searchData, "foursquare");
-      });
+      if (searchTerm){
+        $.getJSON("/dates/results?what=" + searchTerm, function(searchData) {
+            if (searchData.length > 0) {
+              drawMap(searchData, "foursquare");
+            }
+        });
+      } else {
+        console.log("no term")
+      }
   });
 
 
@@ -200,34 +206,42 @@ function drawMap(mapData, api){
 
       // AJAX call to backend for the data
       var searchTerm = $("#not-restaurant").val();
-      $.getJSON("/dates/eventsResults?keywords=" + searchTerm, function(searchData) {
-          drawMap(searchData, "eventful");
-          var maxHeight = 75;
-          var showText = "more";
-          var hideText = "less";
+      if (searchTerm){
+        $.getJSON("/dates/eventsResults?keywords=" + searchTerm, function(searchData) {
+            if (searchData.length > 0) {
+              drawMap(searchData, "eventful");
 
-          $(".truncated_text").each(function(){
-            var text = $(this);
-            if (text.height() > maxHeight){
-              text.css({"overflow": "hidden", "height": maxHeight + "px"});
-              var moreLink = $("<a href='#'>" + showText + "</a>");
-              var moreLinkDiv = $("<div></div>");
-              moreLinkDiv.append(moreLink);
-              $(this).after(moreLinkDiv);
 
-              moreLink.on("click", function(e){
-                e.preventDefault();
-                if (text.height() > maxHeight) {
-                  $(this).html(showText);
-                  text.css("height", maxHeight + "px");
-                } else {
-                  $(this).html(hideText);
-                  text.css("height", "auto");
+              var maxHeight = 75;
+              var showText = "more";
+              var hideText = "less";
+
+              $(".truncated_text").each(function(){
+                var text = $(this);
+                if (text.height() > maxHeight){
+                  text.css({"overflow": "hidden", "height": maxHeight + "px"});
+                  var moreLink = $("<a href='#'>" + showText + "</a>");
+                  var moreLinkDiv = $("<div></div>");
+                  moreLinkDiv.append(moreLink);
+                  $(this).after(moreLinkDiv);
+
+                  moreLink.on("click", function(e){
+                    e.preventDefault();
+                    if (text.height() > maxHeight) {
+                      $(this).html(showText);
+                      text.css("height", maxHeight + "px");
+                    } else {
+                      $(this).html(hideText);
+                      text.css("height", "auto");
+                    }
+                  });
                 }
               });
             }
-          });
-      });
+        });
+      } else {
+        console.log("no term");
+      }
 
   });
 
