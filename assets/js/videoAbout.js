@@ -3,8 +3,8 @@
 // });
 $().ready(function() {
   var pathname = window.location.pathname;
-  console.log(pathname);
-  console.log("where is video?");
+  // console.log(pathname);
+  // console.log("where is video?");
   if (pathname ==='/about') {
     var BV = new $.BigVideo();
 

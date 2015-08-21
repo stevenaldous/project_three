@@ -42,7 +42,7 @@ body{
   background: none;
 }
 .glyphicon-remove{
-  margin-top: 10px;
+  /*margin-top:px;*/
   background: none;
   border: none;
 }
@@ -51,9 +51,6 @@ body{
 }#input-field{
   border: none;
   border-radius: 0px;
-}
-.date-link{
-  color: rgb(0,0,0);
 }
 .dropdown-toggle{
   margin-top: 10px;
@@ -118,6 +115,7 @@ a{
 .searchBtn{
   background-color: rgba(0, 0, 0, .6);
   border: none;
+}
 
 .addToDateBtn {
   margin-bottom: 15px;
@@ -130,4 +128,9 @@ a{
 
 .socialLinks p {
   display: block;
+}
+#date-show{
+
+  color: black;
+  font-size: 20px;
 }
