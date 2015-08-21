@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var NODE_ENV = process.env.NODE_ENV || 'development';
-var BASE_URL = (NODE_ENV === 'production') ? 'https://something.herokuapps.com' : 'http://localhost:3000';
+var BASE_URL = (NODE_ENV === 'production') ? 'https://heywanna.herokuapp.com' : 'http://localhost:3000';
 var db = require("./models");
 var methodOverride = require('method-override');
 app.set('view engine', 'ejs');

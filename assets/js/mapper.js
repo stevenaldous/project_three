@@ -119,7 +119,7 @@ function drawMap(mapData, api){
         listing.className = "item";
         var link = listing.appendChild(document.createElement("a"));
         link.href = "#";
-        // link.className = 'title';
+        link.className = "title";
         link.innerHTML = mapData.events.event[layer.options.idx].title;
         listing.appendChild(document.createElement("br"));
 
@@ -220,7 +220,7 @@ function drawMap(mapData, api){
                 var text = $(this);
                 if (text.height() > maxHeight){
                   text.css({"overflow": "hidden", "height": maxHeight + "px"});
-                  var moreLink = $("<a href='#'>" + showText + "</a>");
+                  var moreLink = $("<a href='#' class='reveal-text'>" + showText + "</a>");
                   var moreLinkDiv = $("<div></div>");
                   moreLinkDiv.append(moreLink);
                   $(this).after(moreLinkDiv);

@@ -70,6 +70,7 @@ input#not-restaurant.form-control {
 }
 .title {
   font-size: 17px;
+  color: #000080;
 }
 #submit-button{
   border: none;
@@ -109,9 +110,11 @@ input#not-restaurant.form-control {
   border: none;
   color: #FFFFFF;
 }
-a{
+
+a {
   color: #FFFFFF;
 }
+
 .searchBtn{
   background-color: rgba(0, 0, 0, .6);
   border: none;
@@ -129,8 +132,12 @@ a{
 .socialLinks p {
   display: block;
 }
-#date-show{
 
+#date-show{
   color: black;
   font-size: 20px;
+}
+
+.reveal-text {
+  color: #000080;
 }
